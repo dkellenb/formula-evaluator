@@ -2,16 +2,14 @@ package li.kellenberger.formulaevaluator.operators;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.Term;
-import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 /**
  * Generic multiplication.
  *
- * @param <I> the input object needed for the evaluation
- * @param <R> the result object after the evaluation
+ * @param <T> the result object after the evaluation
  */
-public abstract class GenericMultiplicationOperation<I extends VariableValueProvider, R>
-  extends GenericStackableOperatorTerm<I, R> {
+public abstract class GenericMultiplicationOperation<T>
+  extends GenericStackableOperatorTerm<T> {
 
   /**
    * Initializes the calculator based on the terms.
@@ -20,7 +18,7 @@ public abstract class GenericMultiplicationOperation<I extends VariableValueProv
    * @param multiplicands all multiplicands
    */
   @SafeVarargs
-  public GenericMultiplicationOperation(Term<I, R> multiplier, Term<I, R>... multiplicands) {
+  public GenericMultiplicationOperation(Term<T> multiplier, Term<T>... multiplicands) {
     super(multiplier, multiplicands);
   }
 
@@ -37,7 +35,7 @@ public abstract class GenericMultiplicationOperation<I extends VariableValueProv
    * @param multiplicand Operand 2.
    * @return The result of the operation.
    */
-  R calculate(FormulaEvaluatorConfiguration conf, R multiplier, R multiplicand) {
+  T calculate(FormulaEvaluatorConfiguration conf, T multiplier, T multiplicand) {
     switch (conf.getMultiplicationNullHandling()) {
       case IDENTITY:
         return multiplier == null && multiplicand == null

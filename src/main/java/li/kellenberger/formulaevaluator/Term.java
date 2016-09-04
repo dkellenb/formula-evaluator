@@ -3,20 +3,19 @@ package li.kellenberger.formulaevaluator;
 /**
  * Calculator Term.
  *
- * @param <I> the input object needed for the evaluation (configuration, where to retrieve the value, ...)
- * @param <R> the result object after the evaluation
+ * @param <T> the result object after the evaluation
  */
-public interface Term<I extends VariableValueProvider, R> {
+public interface Term<T> {
 
   /**
-   * Evaluates input I and returns output R.
+   * Evaluates input I and returns output T.
    *
    * @param input the input
    * @param configuration the formula evaluator configuration
    *
    * @return the evaluated output
    */
-  R evaluate(I input, FormulaEvaluatorConfiguration configuration);
+  T evaluate(VariableValueProvider input, FormulaEvaluatorConfiguration configuration);
 
   /**
    * Prints the calculation formula.

@@ -5,19 +5,16 @@ import java.math.RoundingMode;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.Term;
-import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 import static java.math.BigDecimal.ONE;
 
 /**
  * FRACTIONAL operation.
  * see http://stackoverflow.com/questions/3579779/how-to-do-a-fractional-power-on-bigdecimal-in-java}
- *
- * @param <I> value provider as input
  */
-public class BigDecimalExponentiationOperator<I extends VariableValueProvider>
-    extends GenericExponentiationOperatorTerm<I, BigDecimal>
-    implements BigDecimalOperator<I> {
+public class BigDecimalExponentiationOperator
+    extends GenericExponentiationOperatorTerm<BigDecimal>
+    implements BigDecimalOperator {
 
   /**
    * Initializes the calculator based on the terms.
@@ -25,7 +22,7 @@ public class BigDecimalExponentiationOperator<I extends VariableValueProvider>
    * @param base the base term
    * @param exponent one or many exponent
    */
-  public BigDecimalExponentiationOperator(Term<I, BigDecimal> base, Term<I, BigDecimal> exponent) {
+  public BigDecimalExponentiationOperator(Term<BigDecimal> base, Term<BigDecimal> exponent) {
     super(base, exponent);
   }
 

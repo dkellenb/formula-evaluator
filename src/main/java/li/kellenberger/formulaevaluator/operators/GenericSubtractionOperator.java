@@ -2,16 +2,14 @@ package li.kellenberger.formulaevaluator.operators;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.Term;
-import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 /**
  * Calculates the sum based on the terms passed in the constructor.
  *
- * @param <I> the input object needed for the evaluation
- * @param <R> the result object after the evaluation
+ * @param <T> the result object after the evaluation
  */
-public abstract class GenericSubtractionOperator<I extends VariableValueProvider, R>
-    extends GenericStackableOperatorTerm<I, R> {
+public abstract class GenericSubtractionOperator<T>
+    extends GenericStackableOperatorTerm<T> {
 
   /**
    * Initializes the calculator based on the terms.
@@ -20,7 +18,7 @@ public abstract class GenericSubtractionOperator<I extends VariableValueProvider
    * @param subtrahends all subtrahends
    */
   @SafeVarargs
-  public GenericSubtractionOperator(Term<I, R> minuend, Term<I, R>... subtrahends) {
+  public GenericSubtractionOperator(Term<T> minuend, Term<T>... subtrahends) {
     super(minuend, subtrahends);
   }
 
@@ -37,7 +35,7 @@ public abstract class GenericSubtractionOperator<I extends VariableValueProvider
    * @param subtrahend Operand 2.
    * @return The result of the operation.
    */
-  R calculate(FormulaEvaluatorConfiguration conf, R minuend, R subtrahend) {
+  T calculate(FormulaEvaluatorConfiguration conf, T minuend, T subtrahend) {
     switch (conf.getPlusMinusNullHandling()) {
       case IDENTITY:
         return minuend == null && subtrahend == null

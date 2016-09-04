@@ -18,6 +18,7 @@ public class FormulaEvaluatorNullArgumentException extends RuntimeException {
    */
   public FormulaEvaluatorNullArgumentException(String name, List<?> arguments) {
     super("'null' parameter found for operation/function '" + name
-      + "' and parameters '" + arguments.stream().map(Object::toString).collect(joining("', '")) + "'");
+      + "' and parameters '"
+      + arguments.stream().map(v -> v == null ? null : v.toString()).collect(joining("', '")) + "'");
   }
 }

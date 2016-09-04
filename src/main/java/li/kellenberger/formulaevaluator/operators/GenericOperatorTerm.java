@@ -1,7 +1,6 @@
 package li.kellenberger.formulaevaluator.operators;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
-import li.kellenberger.formulaevaluator.VariableValueProvider;
 import li.kellenberger.formulaevaluator.exceptions.FormulaEvaluatorNullArgumentException;
 
 import static java.util.Arrays.asList;
@@ -9,10 +8,9 @@ import static java.util.Arrays.asList;
 /**
  * Tagging interface for all value calculators.
  *
- * @param <I> the input object needed for the evaluation
- * @param <R> the result object after the evaluation
+ * @param <T> the result object after the evaluation
  */
-public abstract class GenericOperatorTerm<I extends VariableValueProvider, R> implements OperatorTerm<I, R> {
+public abstract class GenericOperatorTerm<T> implements OperatorTerm<T> {
 
   /**
    * Implementation for this operator.
@@ -22,7 +20,7 @@ public abstract class GenericOperatorTerm<I extends VariableValueProvider, R> im
    * @param v2 Operand 2.
    * @return The result of the operation.
    */
-  R calculate(FormulaEvaluatorConfiguration conf, R v1, R v2) {
+  T calculate(FormulaEvaluatorConfiguration conf, T v1, T v2) {
     switch (conf.getDefaultNullHandling()) {
       case NULL:
         return v1 == null || v2 == null ? null : calculateDefault(conf, v1, v2);

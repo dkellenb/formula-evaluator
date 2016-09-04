@@ -8,10 +8,8 @@ import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 /**
  * BigDecimal Term.
- *
- * @param <I> an arbitrary object type (has no effect)
  */
-public class ConstantBigDecimalTerm<I extends VariableValueProvider> implements Term<I, BigDecimal> {
+public class ConstantBigDecimalTerm implements Term<BigDecimal> {
 
   private final BigDecimal value;
 
@@ -24,7 +22,7 @@ public class ConstantBigDecimalTerm<I extends VariableValueProvider> implements 
   }
 
   @Override
-  public BigDecimal evaluate(I input, FormulaEvaluatorConfiguration conf) {
+  public BigDecimal evaluate(VariableValueProvider input, FormulaEvaluatorConfiguration conf) {
     return value;
   }
 

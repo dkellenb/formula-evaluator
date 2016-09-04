@@ -9,13 +9,12 @@ import li.kellenberger.formulaevaluator.VariableValueProvider;
 /**
  * Generic stackable operation.
  *
- * @param <I> the input object needed for the evaluation
- * @param <R> the result object after the evaluation
+ * @param <T> the result object after the evaluation
  */
-abstract class GenericStackableOperatorTerm<I extends VariableValueProvider, R> extends GenericOperatorTerm<I, R> {
+abstract class GenericStackableOperatorTerm<T> extends GenericOperatorTerm<T> {
 
-  private final Term<I, R> base;
-  private final Term<I, R>[] applicants;
+  private final Term<T> base;
+  private final Term<T>[] applicants;
 
   /**
    * Initializes the calculator based on the terms.
@@ -24,13 +23,13 @@ abstract class GenericStackableOperatorTerm<I extends VariableValueProvider, R> 
    * @param applicants all applicants
    */
   @SafeVarargs
-  GenericStackableOperatorTerm(Term<I, R> base, Term<I, R>... applicants) {
+  GenericStackableOperatorTerm(Term<T> base, Term<T>... applicants) {
     this.base = base;
     this.applicants = applicants;
   }
 
   @Override
-  public R evaluate(I input, FormulaEvaluatorConfiguration conf) {
+  public T evaluate(VariableValueProvider input, FormulaEvaluatorConfiguration conf) {
     // Simple case: Only one element
     if (applicants.length == 0) {
       return base.evaluate(input, conf);
@@ -43,13 +42,13 @@ abstract class GenericStackableOperatorTerm<I extends VariableValueProvider, R> 
 
     // If we have applicants, calculate them
     @SuppressWarnings("unchecked")
-    final R[] values = (R[]) Array.newInstance(getResultClass(), applicants.length);
+    final T[] values = (T[]) Array.newInstance(getResultClass(), applicants.length);
     for (int i = 0; i < applicants.length; i++) {
       values[i] = applicants[i].evaluate(input, conf);
     }
 
-    R result = base.evaluate(input, conf);
-    for (R value : values) {
+    T result = base.evaluate(input, conf);
+    for (T value : values) {
       result = calculate(conf, result, value);
     }
 
@@ -61,7 +60,7 @@ abstract class GenericStackableOperatorTerm<I extends VariableValueProvider, R> 
     final StringBuilder sb = new StringBuilder();
     sb.append("(");
     sb.append(base.printFormula());
-    for (Term<I, R> subtrahend : applicants) {
+    for (Term<T> subtrahend : applicants) {
       sb.append(getOperatorName());
       sb.append(subtrahend.printFormula());
     }

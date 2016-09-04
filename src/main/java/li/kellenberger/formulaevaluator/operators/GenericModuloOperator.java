@@ -1,16 +1,14 @@
 package li.kellenberger.formulaevaluator.operators;
 
 import li.kellenberger.formulaevaluator.Term;
-import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 /**
  * Calculates the sum based on the terms passed in the constructor.
  *
- * @param <I> the input object needed for the evaluation
- * @param <R> the result object after the evaluation
+ * @param <T> the result object after the evaluation
  */
-public abstract class GenericModuloOperator<I extends VariableValueProvider, R>
-    extends GenericDivisionOperator<I, R> {
+public abstract class GenericModuloOperator<T>
+    extends GenericDivisionOperator<T> {
 
   /**
    * Initializes the calculator based on the terms.
@@ -18,7 +16,7 @@ public abstract class GenericModuloOperator<I extends VariableValueProvider, R>
    * @param numerator the numerator
    * @param divisor the divisor
    */
-  public GenericModuloOperator(Term<I, R> numerator, Term<I, R> divisor) {
+  public GenericModuloOperator(Term<T> numerator, Term<T> divisor) {
     super(numerator, divisor);
   }
 

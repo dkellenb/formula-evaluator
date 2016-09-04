@@ -2,16 +2,14 @@ package li.kellenberger.formulaevaluator.operators;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.Term;
-import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 /**
  * Calculates the sum based on the terms passed in the constructor.
  *
- * @param <I> the input object needed for the evaluation
- * @param <R> the result object after the evaluation
+ * @param <T> the result object after the evaluation
  */
-public abstract class GenericDivisionOperator<I extends VariableValueProvider, R>
-    extends GenericStackableOperatorTerm<I, R> {
+public abstract class GenericDivisionOperator<T>
+    extends GenericStackableOperatorTerm<T> {
 
   /**
    * Initializes the calculator based on the terms.
@@ -20,7 +18,7 @@ public abstract class GenericDivisionOperator<I extends VariableValueProvider, R
    * @param denominators all denominators
    */
   @SafeVarargs
-  public GenericDivisionOperator(Term<I, R> numerator, Term<I, R>... denominators) {
+  public GenericDivisionOperator(Term<T> numerator, Term<T>... denominators) {
     super(numerator, denominators);
   }
 
@@ -37,8 +35,8 @@ public abstract class GenericDivisionOperator<I extends VariableValueProvider, R
    * @param v2 Operand 2.
    * @return The result of the operation.
    */
-  R calculate(FormulaEvaluatorConfiguration conf, R v1, R v2) {
-    R denominator;
+  T calculate(FormulaEvaluatorConfiguration conf, T v1, T v2) {
+    T denominator;
     switch (conf.getDivisionByZeroHandling()) {
       case ONE:
         denominator = isZero(v2) ? one() : v2;
@@ -71,6 +69,6 @@ public abstract class GenericDivisionOperator<I extends VariableValueProvider, R
    * @param value the value
    * @return true if is zero
    */
-  protected abstract boolean isZero(R value);
+  protected abstract boolean isZero(T value);
 
 }

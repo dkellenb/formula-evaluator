@@ -4,16 +4,13 @@ import java.math.BigDecimal;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.Term;
-import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 /**
  * BigDecimal specific variable value provider.
- *
- * @param <I> value provider as input
  */
-public class BigDecimalAdditionOperator<I extends VariableValueProvider>
-    extends GenericAdditionOperator<I, BigDecimal>
-    implements BigDecimalOperator<I> {
+public class BigDecimalAdditionOperator
+    extends GenericAdditionOperator<BigDecimal>
+    implements BigDecimalOperator {
 
   /**
    * Initializes the calculator based on the summands.
@@ -21,7 +18,8 @@ public class BigDecimalAdditionOperator<I extends VariableValueProvider>
    * @param summand passend summand
    * @param summands passed summands
    */
-  public BigDecimalAdditionOperator(Term<I, BigDecimal> summand, Term<I, BigDecimal>... summands) {
+  @SafeVarargs
+  public BigDecimalAdditionOperator(Term<BigDecimal> summand, Term<BigDecimal>... summands) {
     super(summand, summands);
   }
 

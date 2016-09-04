@@ -2,14 +2,10 @@ package li.kellenberger.formulaevaluator.operators;
 
 import java.math.BigDecimal;
 
-import li.kellenberger.formulaevaluator.VariableValueProvider;
-
 /**
  * Tagging interface for all BigDecimal operators.
- *
- * @param <I> the input object needed for the evaluation (configuration, where to retrieve the value, ...)
  */
-interface BigDecimalOperator<I extends VariableValueProvider> extends OperatorTerm<I, BigDecimal> {
+interface BigDecimalOperator extends OperatorTerm<BigDecimal> {
 
   /**
    * Zero.

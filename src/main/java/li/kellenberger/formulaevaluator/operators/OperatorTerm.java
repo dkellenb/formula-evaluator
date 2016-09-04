@@ -2,15 +2,13 @@ package li.kellenberger.formulaevaluator.operators;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.Term;
-import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 /**
  * Operator Term.
  *
- * @param <I>  * @param <I> the input object needed for the evaluation (configuration, where to retrieve the value, ...)
  * @param <T> type
  */
-interface OperatorTerm<I extends VariableValueProvider, T> extends Term<I, T> {
+interface OperatorTerm<T> extends Term<T> {
 
   /**
    * Operators name (pattern).

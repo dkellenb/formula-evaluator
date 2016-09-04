@@ -2,16 +2,14 @@ package li.kellenberger.formulaevaluator.operators;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.Term;
-import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 /**
  * Calculates the sum based on the terms passed in the constructor.
  *
- * @param <I> the input object needed for the evaluation
- * @param <R> the result object after the evaluation
+ * @param <T> the result object after the evaluation
  */
-public abstract class GenericAdditionOperator<I extends VariableValueProvider, R>
-    extends GenericStackableOperatorTerm<I, R> {
+public abstract class GenericAdditionOperator<T>
+    extends GenericStackableOperatorTerm<T> {
 
   /**
    * Initializes the calculator based on the terms.
@@ -20,7 +18,7 @@ public abstract class GenericAdditionOperator<I extends VariableValueProvider, R
    * @param summands further summands
    */
   @SafeVarargs
-  public GenericAdditionOperator(Term<I, R> summand, Term<I, R>... summands) {
+  public GenericAdditionOperator(Term<T> summand, Term<T>... summands) {
     super(summand, summands);
   }
 
@@ -37,7 +35,7 @@ public abstract class GenericAdditionOperator<I extends VariableValueProvider, R
    * @param summand2 Operand 2.
    * @return The result of the operation.
    */
-  R calculate(FormulaEvaluatorConfiguration conf, R summand1, R summand2) {
+  T calculate(FormulaEvaluatorConfiguration conf, T summand1, T summand2) {
     switch (conf.getPlusMinusNullHandling()) {
       case IDENTITY:
         return summand1 == null && summand2 == null

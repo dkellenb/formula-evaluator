@@ -4,16 +4,13 @@ import java.math.BigDecimal;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.Term;
-import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 /**
  * BigDecimal specific variable value provider.
- *
- * @param <I> value provider as input
  */
-public class BigDecimalModuloOperator<I extends VariableValueProvider>
-    extends GenericModuloOperator<I, BigDecimal>
-    implements BigDecimalOperator<I> {
+public class BigDecimalModuloOperator
+    extends GenericModuloOperator<BigDecimal>
+    implements BigDecimalOperator {
 
   /**
    * Initializes the calculator based on the terms.
@@ -21,7 +18,7 @@ public class BigDecimalModuloOperator<I extends VariableValueProvider>
    * @param numerator the numerator term
    * @param denominator the denominator
    */
-  public BigDecimalModuloOperator(Term<I, BigDecimal> numerator, Term<I, BigDecimal> denominator) {
+  public BigDecimalModuloOperator(Term<BigDecimal> numerator, Term<BigDecimal> denominator) {
     super(numerator, denominator);
   }
 
