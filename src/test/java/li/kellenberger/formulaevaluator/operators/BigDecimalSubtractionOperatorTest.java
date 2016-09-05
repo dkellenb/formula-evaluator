@@ -17,7 +17,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * Tests BigDecimalAdditionOperator.
+ * Tests BigDecimalSubtractionOperator.
  */
 public class BigDecimalSubtractionOperatorTest extends OperatorTest {
 
@@ -36,21 +36,13 @@ public class BigDecimalSubtractionOperatorTest extends OperatorTest {
   @Test
   public void shouldCalculateWithDefaults() {
     // good cases
-    testThat(createOp(v("a")))
-      .with("a", ONE)
-      .equalTo(ONE);
-    testThat(createOp(v("a"), v("b"), c(THREE)))
-      .with("a", SIX).with("b", TWO)
-      .equalTo(ONE);
+    testThat(createOp(v("a"))).with("a", ONE).equalTo(ONE);
+    testThat(createOp(v("a"), v("b"), c(THREE))).with("a", SIX).with("b", TWO).equalTo(ONE);
 
     // null cases
-    testThat(createOp(v("a")))
-      .equalTo(null);
-    testThat(createOp(v("a"), v("b")))
-      .isThrowing(FormulaEvaluatorNullArgumentException.class);
-    testThat(createOp(v("a"), v("b")))
-      .with("a", THREE)
-      .isThrowing(FormulaEvaluatorNullArgumentException.class);
+    testThat(createOp(v("a"))).equalTo(null);
+    testThat(createOp(v("a"), v("b"))).isThrowing(FormulaEvaluatorNullArgumentException.class);
+    testThat(createOp(v("a"), v("b"))).with("a", THREE).isThrowing(FormulaEvaluatorNullArgumentException.class);
   }
 
   @Test
@@ -59,26 +51,13 @@ public class BigDecimalSubtractionOperatorTest extends OperatorTest {
     conf.setDefaultNullHandling(NULL);
 
     // positive test cases
-    testThat(createOp(v("a")))
-      .with("a", ONE)
-      .with(conf)
-      .equalTo(ONE);
-    testThat(createOp(v("a"), v("b"), c(THREE)))
-      .with("a", SIX).with("b", TWO)
-      .with(conf)
-      .equalTo(ONE);
+    testThat(createOp(v("a"))).with("a", ONE).with(conf).equalTo(ONE);
+    testThat(createOp(v("a"), v("b"), c(THREE))).with("a", SIX).with("b", TWO).with(conf).equalTo(ONE);
 
     // null cases
-    testThat(createOp(v("a")))
-      .with(conf)
-      .equalTo(null);
-    testThat(createOp(v("a"), v("b")))
-      .with(conf)
-      .equalTo(null);
-    testThat(createOp(v("a"), v("b")))
-      .with("a", FOUR)
-      .with(conf)
-      .equalTo(null);
+    testThat(createOp(v("a"))).with(conf).equalTo(null);
+    testThat(createOp(v("a"), v("b"))).with(conf).equalTo(null);
+    testThat(createOp(v("a"), v("b"))).with("a", FOUR).with(conf).equalTo(null);
   }
 
   @Test
@@ -87,26 +66,13 @@ public class BigDecimalSubtractionOperatorTest extends OperatorTest {
     conf.setDefaultNullHandling(ZERO);
 
     // positive test cases
-    testThat(createOp(v("a")))
-      .with("a", ONE)
-      .with(conf)
-      .equalTo(ONE);
-    testThat(createOp(v("a"), v("b"), c(THREE)))
-      .with("a", SIX).with("b", TWO)
-      .with(conf)
-      .equalTo(ONE);
+    testThat(createOp(v("a"))).with("a", ONE).with(conf).equalTo(ONE);
+    testThat(createOp(v("a"), v("b"), c(THREE))).with("a", SIX).with("b", TWO).with(conf).equalTo(ONE);
 
     // null cases
-    testThat(createOp(v("a")))
-      .with(conf)
-      .equalTo(null);
-    testThat(createOp(v("a"), v("b")))
-      .with(conf)
-      .equalTo(BigDecimal.ZERO);
-    testThat(createOp(v("a"), v("b")))
-      .with("a", FOUR)
-      .with(conf)
-      .equalTo(FOUR);
+    testThat(createOp(v("a"))).with(conf).equalTo(null);
+    testThat(createOp(v("a"), v("b"))).with(conf).equalTo(BigDecimal.ZERO);
+    testThat(createOp(v("a"), v("b"))).with("a", FOUR).with(conf).equalTo(FOUR);
   }
 
   @Test
@@ -115,26 +81,13 @@ public class BigDecimalSubtractionOperatorTest extends OperatorTest {
     conf.setPlusMinusNullHandling(IDENTITY);
 
     // positive test cases
-    testThat(createOp(v("a")))
-      .with("a", ONE)
-      .with(conf)
-      .equalTo(ONE);
-    testThat(createOp(v("a"), v("b"), c(THREE)))
-      .with("a", SIX).with("b", TWO)
-      .with(conf)
-      .equalTo(ONE);
+    testThat(createOp(v("a"))).with("a", ONE).with(conf).equalTo(ONE);
+    testThat(createOp(v("a"), v("b"), c(THREE))).with("a", SIX).with("b", TWO).with(conf).equalTo(ONE);
 
     // null cases
-    testThat(createOp(v("a")))
-      .with(conf)
-      .equalTo(null);
-    testThat(createOp(v("a"), v("b")))
-      .with(conf)
-      .equalTo(null);
-    testThat(createOp(v("a"), v("b")))
-      .with("a", FOUR)
-      .with(conf)
-      .equalTo(FOUR);
+    testThat(createOp(v("a"))).with(conf).equalTo(null);
+    testThat(createOp(v("a"), v("b"))).with(conf).equalTo(null);
+    testThat(createOp(v("a"), v("b"))).with("a", FOUR).with(conf).equalTo(FOUR);
   }
 
   private static Term<BigDecimal> createOp(Term<BigDecimal> base) {

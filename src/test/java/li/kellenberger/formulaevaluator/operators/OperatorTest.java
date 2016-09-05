@@ -40,4 +40,8 @@ public class OperatorTest {
 
   protected static final BigDecimal SIX = new BigDecimal(6);
 
+  protected static final BigDecimal EIGHT = new BigDecimal(8);
+
+  protected static final BigDecimal NINE = new BigDecimal(9);
+
 }
