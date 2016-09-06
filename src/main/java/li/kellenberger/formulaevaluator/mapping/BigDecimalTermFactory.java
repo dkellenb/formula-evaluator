@@ -47,7 +47,7 @@ public final class BigDecimalTermFactory implements TermFactory<BigDecimal> {
    *
    * @return the factory
    */
-  public BigDecimalTermFactory getInstance() {
+  public static BigDecimalTermFactory getInstance() {
     if (instance == null) {
       instance = new BigDecimalTermFactory();
     }

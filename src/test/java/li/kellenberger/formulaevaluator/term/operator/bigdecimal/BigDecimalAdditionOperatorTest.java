@@ -1,4 +1,4 @@
-package li.kellenberger.formulaevaluator.term.operator;
+package li.kellenberger.formulaevaluator.term.operator.bigdecimal;
 
 import java.math.BigDecimal;
 
@@ -7,6 +7,8 @@ import org.junit.Test;
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.term.Term;
 import li.kellenberger.formulaevaluator.exceptions.FormulaEvaluatorNullArgumentException;
+import li.kellenberger.formulaevaluator.term.operator.OperatorTest;
+import li.kellenberger.formulaevaluator.term.operator.TermTester;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalAdditionOperator;
 
 import static java.math.BigDecimal.ONE;

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import li.kellenberger.formulaevaluator.VariableValueProvider;
 
-import static java.util.Collections.unmodifiableMap;
+import static java.util.Collections.emptyMap;
 
 /**
  * HashMap based value provider.
@@ -21,7 +21,7 @@ public final class BigDecimalVariableValueProvider implements VariableValueProvi
    * @param map default map
    */
   public BigDecimalVariableValueProvider(Map<String, BigDecimal> map) {
-    this.map = unmodifiableMap(map);
+    this.map = new HashMap<>(map);
   }
 
   /**
@@ -30,7 +30,7 @@ public final class BigDecimalVariableValueProvider implements VariableValueProvi
    * @return new instance
    */
   public static BigDecimalVariableValueProvider createValueProvider() {
-    return new BigDecimalVariableValueProvider(new HashMap<>());
+    return new BigDecimalVariableValueProvider(emptyMap());
   }
 
   /**
