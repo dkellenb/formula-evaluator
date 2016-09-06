@@ -1,4 +1,4 @@
-package li.kellenberger.formulaevaluator.value;
+package li.kellenberger.formulaevaluator.term.value;
 
 import li.kellenberger.formulaevaluator.term.Term;
 

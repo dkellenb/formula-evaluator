@@ -2,8 +2,8 @@ package li.kellenberger.formulaevaluator.term.operator;
 
 import java.math.BigDecimal;
 
-import li.kellenberger.formulaevaluator.value.BigDecimalVariable;
-import li.kellenberger.formulaevaluator.value.ConstantBigDecimalTerm;
+import li.kellenberger.formulaevaluator.term.value.BigDecimalVariable;
+import li.kellenberger.formulaevaluator.term.value.ConstantBigDecimalTerm;
 
 /**
  * Generic test class for all operators

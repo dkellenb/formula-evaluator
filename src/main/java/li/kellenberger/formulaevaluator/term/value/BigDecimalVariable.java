@@ -1,4 +1,4 @@
-package li.kellenberger.formulaevaluator.value;
+package li.kellenberger.formulaevaluator.term.value;
 
 import java.math.BigDecimal;
 

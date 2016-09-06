@@ -9,6 +9,25 @@ import li.kellenberger.formulaevaluator.definition.Constant;
 import li.kellenberger.formulaevaluator.definition.Function;
 import li.kellenberger.formulaevaluator.definition.Operator;
 import li.kellenberger.formulaevaluator.term.Term;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimal10LogarithmFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalAbsoluteFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalCeilingFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalCosinusFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalDegreesFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalFloorFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalHyperbolicSinusFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalHyperbolicTangentFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalIfFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalMaxFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalMinFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalNaturalLogarithmFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalNotFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalRadiansFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalRandomFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalRoundFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalSinusFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalSquareRootFunctionTerm;
+import li.kellenberger.formulaevaluator.term.function.bigdecimal.BigDecimalTangentFunctionTerm;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalAdditionOperator;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalDivisionOperator;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalEqualOperator;
@@ -23,8 +42,8 @@ import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalNotEq
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalSmallerEqualOperator;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalSmallerOperator;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalSubtractionOperator;
-import li.kellenberger.formulaevaluator.value.BigDecimalVariable;
-import li.kellenberger.formulaevaluator.value.ConstantBigDecimalTerm;
+import li.kellenberger.formulaevaluator.term.value.BigDecimalVariable;
+import li.kellenberger.formulaevaluator.term.value.ConstantBigDecimalTerm;
 
 /**
  * Factory for creating BigDecimal Terms.
@@ -141,7 +160,26 @@ public final class BigDecimalTermFactory implements TermFactory<BigDecimal> {
   }
 
   private void registerDefaultFunctions() {
-
+    registerFunction(Function.NOT, BigDecimalNotFunctionTerm::new);
+    registerFunction(Function.IF, BigDecimalIfFunctionTerm::new);
+    registerFunction(Function.RANDOM, BigDecimalRandomFunctionTerm::new);
+    registerFunction(Function.SIN, BigDecimalSinusFunctionTerm::new);
+    registerFunction(Function.COS, BigDecimalCosinusFunctionTerm::new);
+    registerFunction(Function.TAN, BigDecimalTangentFunctionTerm::new);
+    registerFunction(Function.SINH, BigDecimalHyperbolicSinusFunctionTerm::new);
+    registerFunction(Function.COSH, BigDecimalHyperbolicTangentFunctionTerm::new);
+    registerFunction(Function.TANH, BigDecimalHyperbolicTangentFunctionTerm::new);
+    registerFunction(Function.RAD, BigDecimalRadiansFunctionTerm::new);
+    registerFunction(Function.DEG, BigDecimalDegreesFunctionTerm::new);
+    registerFunction(Function.MIN, BigDecimalMinFunctionTerm::new);
+    registerFunction(Function.MAX, BigDecimalMaxFunctionTerm::new);
+    registerFunction(Function.LOG, BigDecimalNaturalLogarithmFunctionTerm::new);
+    registerFunction(Function.LOG10, BigDecimal10LogarithmFunctionTerm::new);
+    registerFunction(Function.ROUND, BigDecimalRoundFunctionTerm::new);
+    registerFunction(Function.FLOOR, BigDecimalFloorFunctionTerm::new);
+    registerFunction(Function.CEILING, BigDecimalCeilingFunctionTerm::new);
+    registerFunction(Function.ABS, BigDecimalAbsoluteFunctionTerm::new);
+    registerFunction(Function.SQRT, BigDecimalSquareRootFunctionTerm::new);
   }
 
   private void registerDefaultConstants() {

@@ -3,6 +3,8 @@ package li.kellenberger.formulaevaluator.mapping;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 
@@ -12,7 +14,7 @@ import li.kellenberger.formulaevaluator.definition.Constant;
 import li.kellenberger.formulaevaluator.definition.Function;
 import li.kellenberger.formulaevaluator.definition.Operator;
 import li.kellenberger.formulaevaluator.term.Term;
-import li.kellenberger.formulaevaluator.value.ConstantBigDecimalTerm;
+import li.kellenberger.formulaevaluator.term.value.ConstantBigDecimalTerm;
 import li.kellenberger.formulaevaluator.valueprovider.BigDecimalVariableValueProvider;
 
 import static java.math.BigDecimal.ONE;
@@ -100,7 +102,7 @@ public class BigDecimalTermFactoryTest {
     List<Function> unsupportedFunctions = new LinkedList<>();
     for (Function function : Function.ALL_FUNCTIONS) {
       try {
-        factory.getFunctionTerm(function, new ConstantBigDecimalTerm(ONE), new ConstantBigDecimalTerm(ONE));
+        factory.getFunctionTerm(function, createConstArgs(function));
       } catch (UnsupportedOperationException e) {
         unsupportedFunctions.add(function);
       }
@@ -110,6 +112,11 @@ public class BigDecimalTermFactoryTest {
     assertThat("Following operations are not yet supported: "
         + unsupportedFunctions.stream().map(Function::getName).collect(joining(" ")),
       unsupportedFunctions.size(), equalTo(0));
+  }
+
+  private ConstantBigDecimalTerm[] createConstArgs(Function function) {
+    Stream<ConstantBigDecimalTerm> argStream = IntStream.range(0, function.getNumParams()).mapToObj(v -> new ConstantBigDecimalTerm(ONE));
+    return argStream.toArray(ConstantBigDecimalTerm[]::new);
   }
 
   @Test
