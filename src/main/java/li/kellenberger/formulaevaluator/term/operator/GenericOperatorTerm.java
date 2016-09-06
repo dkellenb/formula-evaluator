@@ -20,7 +20,7 @@ public abstract class GenericOperatorTerm<T> implements OperatorTerm<T> {
    * @param v2 Operand 2.
    * @return The result of the operation.
    */
-  T calculate(FormulaEvaluatorConfiguration conf, T v1, T v2) {
+  protected T calculate(FormulaEvaluatorConfiguration conf, T v1, T v2) {
     switch (conf.getDefaultNullHandling()) {
       case NULL:
         return v1 == null || v2 == null ? null : calculateDefault(conf, v1, v2);

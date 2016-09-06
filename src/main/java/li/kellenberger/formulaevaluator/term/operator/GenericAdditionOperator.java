@@ -1,6 +1,7 @@
 package li.kellenberger.formulaevaluator.term.operator;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
+import li.kellenberger.formulaevaluator.definition.Operator;
 import li.kellenberger.formulaevaluator.term.Term;
 
 /**
@@ -24,7 +25,7 @@ public abstract class GenericAdditionOperator<T>
 
   @Override
   public String getOperatorName() {
-    return "+";
+    return Operator.PLUS.getOperatorName();
   }
 
   /**
@@ -35,7 +36,7 @@ public abstract class GenericAdditionOperator<T>
    * @param summand2 Operand 2.
    * @return The result of the operation.
    */
-  T calculate(FormulaEvaluatorConfiguration conf, T summand1, T summand2) {
+  protected T calculate(FormulaEvaluatorConfiguration conf, T summand1, T summand2) {
     switch (conf.getPlusMinusNullHandling()) {
       case IDENTITY:
         return summand1 == null && summand2 == null

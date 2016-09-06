@@ -5,11 +5,10 @@ import java.math.BigDecimal;
 import org.junit.Test;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
-import li.kellenberger.formulaevaluator.term.Term;
 import li.kellenberger.formulaevaluator.exceptions.FormulaEvaluatorNullArgumentException;
+import li.kellenberger.formulaevaluator.term.Term;
 import li.kellenberger.formulaevaluator.term.operator.OperatorTest;
 import li.kellenberger.formulaevaluator.term.operator.TermTester;
-import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalAdditionOperator;
 
 import static java.math.BigDecimal.ONE;
 import static li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration.BasicOperationsNullHandling.IDENTITY;
@@ -26,7 +25,7 @@ public class BigDecimalAdditionOperatorTest extends OperatorTest {
   @Test
   public void shouldPrintFormula() {
     // given
-    Term<BigDecimal> operator = new BigDecimalAdditionOperator(v("a"), v("b"), v("c"));
+    Term<BigDecimal> operator = createOp(v("a"), v("b"), v("c"));
 
     // when
     String formula = operator.printFormula();

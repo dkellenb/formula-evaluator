@@ -25,7 +25,7 @@ public class BigDecimalModuloOperatorTest extends OperatorTest {
   @Test
   public void shouldPrintFormula() {
     // given
-    Term<BigDecimal> operator = new BigDecimalModuloOperator(v("a"), v("b"));
+    Term<BigDecimal> operator = createOp(v("a"), v("b"));
 
     // when
     String formula = operator.printFormula();

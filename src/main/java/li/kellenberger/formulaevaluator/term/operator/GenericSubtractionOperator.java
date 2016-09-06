@@ -1,6 +1,7 @@
 package li.kellenberger.formulaevaluator.term.operator;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
+import li.kellenberger.formulaevaluator.definition.Operator;
 import li.kellenberger.formulaevaluator.term.Term;
 
 /**
@@ -24,7 +25,7 @@ public abstract class GenericSubtractionOperator<T>
 
   @Override
   public String getOperatorName() {
-    return "-";
+    return Operator.MINUS.getOperatorName();
   }
 
   /**
@@ -35,7 +36,7 @@ public abstract class GenericSubtractionOperator<T>
    * @param subtrahend Operand 2.
    * @return The result of the operation.
    */
-  T calculate(FormulaEvaluatorConfiguration conf, T minuend, T subtrahend) {
+  protected T calculate(FormulaEvaluatorConfiguration conf, T minuend, T subtrahend) {
     switch (conf.getPlusMinusNullHandling()) {
       case IDENTITY:
         return minuend == null && subtrahend == null

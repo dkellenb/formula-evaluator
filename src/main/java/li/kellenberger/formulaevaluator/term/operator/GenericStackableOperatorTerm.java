@@ -11,7 +11,7 @@ import li.kellenberger.formulaevaluator.VariableValueProvider;
  *
  * @param <T> the result object after the evaluation
  */
-abstract class GenericStackableOperatorTerm<T> extends GenericOperatorTerm<T> {
+public abstract class GenericStackableOperatorTerm<T> extends GenericOperatorTerm<T> {
 
   private final Term<T> base;
   private final Term<T>[] applicants;
@@ -23,7 +23,7 @@ abstract class GenericStackableOperatorTerm<T> extends GenericOperatorTerm<T> {
    * @param applicants all applicants
    */
   @SafeVarargs
-  GenericStackableOperatorTerm(Term<T> base, Term<T>... applicants) {
+  public GenericStackableOperatorTerm(Term<T> base, Term<T>... applicants) {
     this.base = base;
     this.applicants = applicants;
   }

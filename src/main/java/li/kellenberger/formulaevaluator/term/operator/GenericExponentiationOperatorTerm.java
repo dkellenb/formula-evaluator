@@ -1,5 +1,6 @@
 package li.kellenberger.formulaevaluator.term.operator;
 
+import li.kellenberger.formulaevaluator.definition.Operator;
 import li.kellenberger.formulaevaluator.term.Term;
 
 /**
@@ -22,7 +23,7 @@ public abstract class GenericExponentiationOperatorTerm<T>
 
   @Override
   public String getOperatorName() {
-    return "^";
+    return Operator.FRACTION.getOperatorName();
   }
 
 }

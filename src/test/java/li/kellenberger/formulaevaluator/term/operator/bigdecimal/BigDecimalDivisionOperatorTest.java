@@ -26,7 +26,7 @@ public class BigDecimalDivisionOperatorTest extends OperatorTest {
   @Test
   public void shouldPrintFormula() {
     // given
-    Term<BigDecimal> operator = new BigDecimalDivisionOperator(v("a"), v("b"), v("c"));
+    Term<BigDecimal> operator = createOp(v("a"), v("b"), v("c"));
 
     // when
     String formula = operator.printFormula();

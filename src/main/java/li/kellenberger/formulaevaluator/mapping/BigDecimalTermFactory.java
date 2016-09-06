@@ -11,9 +11,17 @@ import li.kellenberger.formulaevaluator.definition.Operator;
 import li.kellenberger.formulaevaluator.term.Term;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalAdditionOperator;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalDivisionOperator;
+import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalEqualOperator;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalExponentiationOperator;
+import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalGreaterEqualOperator;
+import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalGreaterOperator;
+import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalLogicalAndOperator;
+import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalLogicalOrOperator;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalModuloOperator;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalMultiplicationOperator;
+import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalNotEqualOperator;
+import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalSmallerEqualOperator;
+import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalSmallerOperator;
 import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalSubtractionOperator;
 import li.kellenberger.formulaevaluator.value.BigDecimalVariable;
 import li.kellenberger.formulaevaluator.value.ConstantBigDecimalTerm;
@@ -120,6 +128,16 @@ public final class BigDecimalTermFactory implements TermFactory<BigDecimal> {
     registerOperation(Operator.DIVISION, BigDecimalDivisionOperator::new);
     registerOperation(Operator.MODULO, BigDecimalModuloOperator::new);
     registerOperation(Operator.FRACTION, BigDecimalExponentiationOperator::new);
+    registerOperation(Operator.LOGICAL_AND, BigDecimalLogicalAndOperator::new);
+    registerOperation(Operator.LOGICAL_OR, BigDecimalLogicalOrOperator::new);
+    registerOperation(Operator.GREATER, BigDecimalGreaterOperator::new);
+    registerOperation(Operator.GREATER_EQUAL, BigDecimalGreaterEqualOperator::new);
+    registerOperation(Operator.SMALLER, BigDecimalSmallerOperator::new);
+    registerOperation(Operator.SMALLER_EQUAL, BigDecimalSmallerEqualOperator::new);
+    registerOperation(Operator.EQUAL, BigDecimalEqualOperator::new);
+    registerOperation(Operator.EQUAL2, BigDecimalEqualOperator::new);
+    registerOperation(Operator.NOT_EQUAL, BigDecimalNotEqualOperator::new);
+    registerOperation(Operator.NOT_EQUAL2, BigDecimalNotEqualOperator::new);
   }
 
   private void registerDefaultFunctions() {

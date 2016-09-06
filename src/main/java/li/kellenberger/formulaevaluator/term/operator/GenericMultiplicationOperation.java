@@ -1,6 +1,7 @@
 package li.kellenberger.formulaevaluator.term.operator;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
+import li.kellenberger.formulaevaluator.definition.Operator;
 import li.kellenberger.formulaevaluator.term.Term;
 
 /**
@@ -24,7 +25,7 @@ public abstract class GenericMultiplicationOperation<T>
 
   @Override
   public String getOperatorName() {
-    return "*";
+    return Operator.MULTIPLY.getOperatorName();
   }
 
   /**
@@ -35,7 +36,7 @@ public abstract class GenericMultiplicationOperation<T>
    * @param multiplicand Operand 2.
    * @return The result of the operation.
    */
-  T calculate(FormulaEvaluatorConfiguration conf, T multiplier, T multiplicand) {
+  protected T calculate(FormulaEvaluatorConfiguration conf, T multiplier, T multiplicand) {
     switch (conf.getMultiplicationNullHandling()) {
       case IDENTITY:
         return multiplier == null && multiplicand == null
