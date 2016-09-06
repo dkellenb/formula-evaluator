@@ -1,4 +1,7 @@
-package li.kellenberger.formulaevaluator;
+package li.kellenberger.formulaevaluator.term;
+
+import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
+import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 /**
  * Calculator Term.

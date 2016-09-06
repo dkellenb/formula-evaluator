@@ -1,4 +1,4 @@
-package li.kellenberger.formulaevaluator.operators;
+package li.kellenberger.formulaevaluator.term.operator;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import org.hamcrest.core.IsEqual;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
-import li.kellenberger.formulaevaluator.Term;
+import li.kellenberger.formulaevaluator.term.Term;
 import li.kellenberger.formulaevaluator.valueprovider.BigDecimalVariableValueProvider;
 
 import static org.junit.Assert.assertThat;

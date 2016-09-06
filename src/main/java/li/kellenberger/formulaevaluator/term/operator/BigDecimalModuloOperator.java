@@ -1,32 +1,31 @@
-package li.kellenberger.formulaevaluator.operators;
+package li.kellenberger.formulaevaluator.term.operator;
 
 import java.math.BigDecimal;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
-import li.kellenberger.formulaevaluator.Term;
+import li.kellenberger.formulaevaluator.term.Term;
 
 /**
  * BigDecimal specific variable value provider.
  */
-public class BigDecimalDivisionOperator
-    extends GenericDivisionOperator<BigDecimal>
+public class BigDecimalModuloOperator
+    extends GenericModuloOperator<BigDecimal>
     implements BigDecimalOperator {
 
   /**
    * Initializes the calculator based on the terms.
    *
    * @param numerator the numerator term
-   * @param denominators one or many denominators
+   * @param denominator the denominator
    */
-  @SafeVarargs
-  public BigDecimalDivisionOperator(Term<BigDecimal> numerator, Term<BigDecimal>... denominators) {
-    super(numerator, denominators);
+  public BigDecimalModuloOperator(Term<BigDecimal> numerator, Term<BigDecimal> denominator) {
+    super(numerator, denominator);
   }
 
   @Override
   public BigDecimal calculateDefault(FormulaEvaluatorConfiguration conf,
                                      BigDecimal numerator, BigDecimal denominator) {
-    return numerator.divide(denominator, conf.getMathContext());
+    return numerator.remainder(denominator, conf.getMathContext());
   }
 
   @Override

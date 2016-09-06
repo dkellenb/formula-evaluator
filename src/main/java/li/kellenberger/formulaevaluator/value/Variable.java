@@ -1,6 +1,6 @@
 package li.kellenberger.formulaevaluator.value;
 
-import li.kellenberger.formulaevaluator.Term;
+import li.kellenberger.formulaevaluator.term.Term;
 
 /**
  * Variable.

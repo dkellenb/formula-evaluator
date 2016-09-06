@@ -1,9 +1,9 @@
-package li.kellenberger.formulaevaluator.operators;
+package li.kellenberger.formulaevaluator.term.operator;
 
 import java.math.BigDecimal;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
-import li.kellenberger.formulaevaluator.Term;
+import li.kellenberger.formulaevaluator.term.Term;
 
 /**
  * BigDecimal specific variable value provider.

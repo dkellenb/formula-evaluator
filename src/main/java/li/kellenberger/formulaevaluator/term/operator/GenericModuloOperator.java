@@ -1,6 +1,6 @@
-package li.kellenberger.formulaevaluator.operators;
+package li.kellenberger.formulaevaluator.term.operator;
 
-import li.kellenberger.formulaevaluator.Term;
+import li.kellenberger.formulaevaluator.term.Term;
 
 /**
  * Calculates the sum based on the terms passed in the constructor.

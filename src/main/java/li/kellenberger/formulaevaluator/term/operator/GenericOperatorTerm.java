@@ -1,4 +1,4 @@
-package li.kellenberger.formulaevaluator.operators;
+package li.kellenberger.formulaevaluator.term.operator;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.exceptions.FormulaEvaluatorNullArgumentException;

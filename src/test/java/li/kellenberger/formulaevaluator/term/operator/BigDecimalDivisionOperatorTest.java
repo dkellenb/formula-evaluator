@@ -1,18 +1,18 @@
-package li.kellenberger.formulaevaluator.operators;
+package li.kellenberger.formulaevaluator.term.operator;
 
 import java.math.BigDecimal;
 
 import org.junit.Test;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
-import li.kellenberger.formulaevaluator.Term;
+import li.kellenberger.formulaevaluator.term.Term;
 import li.kellenberger.formulaevaluator.exceptions.FormulaEvaluatorNullArgumentException;
 
 import static java.math.BigDecimal.ONE;
 import static li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration.BasicOperationsNullHandling.IDENTITY;
 import static li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration.DefaultNullHandling.NULL;
 import static li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration.DefaultNullHandling.ZERO;
-import static li.kellenberger.formulaevaluator.operators.TermTester.testThat;
+import static li.kellenberger.formulaevaluator.term.operator.TermTester.testThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
