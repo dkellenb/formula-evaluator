@@ -8,7 +8,7 @@ import li.kellenberger.formulaevaluator.term.Term;
  *
  * @param <T> type
  */
-interface OperatorTerm<T> extends Term<T> {
+public interface OperatorTerm<T> extends Term<T> {
 
   /**
    * Operators name (pattern).

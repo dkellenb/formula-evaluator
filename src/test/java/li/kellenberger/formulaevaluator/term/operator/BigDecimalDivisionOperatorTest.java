@@ -7,6 +7,7 @@ import org.junit.Test;
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.term.Term;
 import li.kellenberger.formulaevaluator.exceptions.FormulaEvaluatorNullArgumentException;
+import li.kellenberger.formulaevaluator.term.operator.bigdecimal.BigDecimalDivisionOperator;
 
 import static java.math.BigDecimal.ONE;
 import static li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration.BasicOperationsNullHandling.IDENTITY;

@@ -1,9 +1,10 @@
-package li.kellenberger.formulaevaluator.term.operator;
+package li.kellenberger.formulaevaluator.term.operator.bigdecimal;
 
 import java.math.BigDecimal;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.term.Term;
+import li.kellenberger.formulaevaluator.term.operator.GenericAdditionOperator;
 
 /**
  * BigDecimal specific variable value provider.

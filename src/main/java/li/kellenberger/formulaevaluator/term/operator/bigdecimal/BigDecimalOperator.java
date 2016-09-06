@@ -1,6 +1,8 @@
-package li.kellenberger.formulaevaluator.term.operator;
+package li.kellenberger.formulaevaluator.term.operator.bigdecimal;
 
 import java.math.BigDecimal;
+
+import li.kellenberger.formulaevaluator.term.operator.OperatorTerm;
 
 /**
  * Tagging interface for all BigDecimal operators.

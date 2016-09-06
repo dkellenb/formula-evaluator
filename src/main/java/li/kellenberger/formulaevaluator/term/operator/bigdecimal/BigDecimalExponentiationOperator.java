@@ -1,10 +1,11 @@
-package li.kellenberger.formulaevaluator.term.operator;
+package li.kellenberger.formulaevaluator.term.operator.bigdecimal;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import li.kellenberger.formulaevaluator.FormulaEvaluatorConfiguration;
 import li.kellenberger.formulaevaluator.term.Term;
+import li.kellenberger.formulaevaluator.term.operator.GenericExponentiationOperatorTerm;
 
 import static java.math.BigDecimal.ONE;
 
