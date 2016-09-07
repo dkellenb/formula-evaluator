@@ -3,11 +3,13 @@ package li.kellenberger.formulaevaluator.valueprovider;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import li.kellenberger.formulaevaluator.VariableValueProvider;
 
 import static java.util.Collections.emptyMap;
+import static java.util.Collections.unmodifiableSet;
 
 /**
  * HashMap based value provider.
@@ -50,6 +52,11 @@ public final class BigDecimalVariableValueProvider implements VariableValueProvi
   @Override
   public BigDecimal getValue(String variable) {
     return map.get(variable);
+  }
+
+  @Override
+  public Set<String> getVariables() {
+    return unmodifiableSet(map.keySet());
   }
 
   @Override

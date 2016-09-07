@@ -1,12 +1,14 @@
 package li.kellenberger.formulaevaluator;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 import org.junit.Test;
 
 import li.kellenberger.formulaevaluator.term.Term;
 import li.kellenberger.formulaevaluator.valueprovider.BigDecimalVariableValueProvider;
 
+import static java.util.Collections.emptySet;
 import static li.kellenberger.formulaevaluator.valueprovider.BigDecimalVariableValueProvider.createValueProvider;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -41,21 +43,6 @@ public class FormulaCompilerBigDecimalTest {
 
     // when
     Term<BigDecimal> compiledFormula = FormulaCompiler.compile(formula, "a");
-
-    // then
-    assertThat(compiledFormula.printFormula(), equalTo(formula));
-    assertThat(compiledFormula.evaluate(valueProvider, DEFAULT_CONFIGURATION), equalTo(eight));
-  }
-
-  @Test
-  public void shouldCreateVariableTreeWithExperimentalVariableDetection() {
-    // given
-    String formula = "a";
-    BigDecimal eight = new BigDecimal(8);
-    BigDecimalVariableValueProvider valueProvider = createValueProvider().with("a", eight);
-
-    // when
-    Term<BigDecimal> compiledFormula = FormulaCompiler.create(formula).enableUnknownTermsAsVariable().build();
 
     // then
     assertThat(compiledFormula.printFormula(), equalTo(formula));
@@ -108,6 +95,11 @@ public class FormulaCompilerBigDecimalTest {
     @Override
     public BigDecimal getValue(String variable) {
       throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Set<String> getVariables() {
+      return emptySet();
     }
   }
 

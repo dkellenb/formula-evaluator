@@ -17,6 +17,7 @@ import li.kellenberger.formulaevaluator.mapping.TermFactory;
 import li.kellenberger.formulaevaluator.term.Term;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptySet;
 
 /**
  * Compiles a Formula to an RPN and based on the RPN build up the formula evaluator tree.
@@ -43,9 +44,6 @@ final class FormulaCompiler<T> {
   /** List of known variables. */
   private final Set<String> variables;
 
-  /** If set to true, unknown terms will be identified as variables. */
-  private boolean declareUnknownTermsAsVariable = false;
-
   /** The cached RPN (Reverse Polish Notation) of the expression. */
   private List<String> rpn = null;
 
@@ -67,15 +65,39 @@ final class FormulaCompiler<T> {
   }
 
   /**
+   * Compiles a formula and returns the Calculation Tree.
+   *
+   * @param formula the formula
+   * @param variables all variables in the formula
+   * @return the tree
+   */
+  public static Term<BigDecimal> compile(String formula, Set<String> variables) {
+    return create(formula, variables).build();
+  }
+
+  /**
    * Creates a BigDecimal based formula compiler. Default visibility for testing purpose.
    *
    * @param formula the formula
    * @param variables known variables
    * @return the compiler
    */
-  static FormulaCompiler<BigDecimal> create(String formula, String... variables) {
+  public static FormulaCompiler<BigDecimal> create(String formula, String... variables) {
     return new FormulaCompiler<>(formula,
-      new HashSet<>(asList(variables)),
+      variables.length == 0 ? emptySet() : new HashSet<>(asList(variables)),
+      BigDecimalTermFactory.getInstance());
+  }
+
+  /**
+   * Creates a BigDecimal based formula compiler. Default visibility for testing purpose.
+   *
+   * @param formula the formula
+   * @param variables known variables
+   * @return the compiler
+   */
+  public static FormulaCompiler<BigDecimal> create(String formula, Set<String> variables) {
+    return new FormulaCompiler<>(formula,
+      new HashSet<>(variables),
       BigDecimalTermFactory.getInstance());
   }
 
@@ -121,15 +143,6 @@ final class FormulaCompiler<T> {
       }
     }
     return stack.pop();
-  }
-
-  /**
-   * Experimental feature to enable detection of undeclared variables.
-   * @return self
-   */
-  FormulaCompiler<T> enableUnknownTermsAsVariable() {
-    declareUnknownTermsAsVariable = true;
-    return this;
   }
 
   /**
@@ -242,11 +255,7 @@ final class FormulaCompiler<T> {
         throw new RuntimeException("Mismatched parentheses");
       }
       if (!operators.containsKey(element)) {
-        if (declareUnknownTermsAsVariable) {
-          variables.add(element);
-        } else {
-          throw new RuntimeException("Unknown operator, function or unregistered variable: " + element);
-        }
+        throw new RuntimeException("Unknown operator, function or unregistered variable: " + element);
       }
       outputQueue.add(element);
     }
