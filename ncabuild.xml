@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ncabuild xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://software.group.nca/ncabuild/schema/ncabuild-1.1.xsd">
+  <ncamaven>
+    <java version="1.8.0_92"/>
+    <maven version="3.3.1">
+      <!--  <option>-Xmx512M</option> -->
+    </maven>
+  </ncamaven>
+  <ncanode version="5"/>
+</ncabuild>
