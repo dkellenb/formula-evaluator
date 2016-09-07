@@ -15,12 +15,21 @@ public class BigDecimalRoundFunctionTerm extends GenericFunctionTerm<BigDecimal>
     implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param value the value
+   * @param precision the precision
+   */
+  public BigDecimalRoundFunctionTerm(Term<BigDecimal> value, Term<BigDecimal> precision) {
+    super(value, precision);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalRoundFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalRoundFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

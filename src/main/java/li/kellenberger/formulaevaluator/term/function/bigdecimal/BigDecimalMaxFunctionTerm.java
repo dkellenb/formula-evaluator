@@ -14,12 +14,21 @@ import li.kellenberger.formulaevaluator.term.function.GenericFunctionTerm;
 public class BigDecimalMaxFunctionTerm extends GenericFunctionTerm<BigDecimal> implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param term1 the first argument
+   * @param term2 the second argument
+   */
+  public BigDecimalMaxFunctionTerm(Term<BigDecimal> term1, Term<BigDecimal> term2) {
+    super(term1, term2);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalMaxFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalMaxFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

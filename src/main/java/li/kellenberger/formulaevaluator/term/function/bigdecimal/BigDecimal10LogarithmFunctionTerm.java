@@ -15,12 +15,20 @@ public class BigDecimal10LogarithmFunctionTerm extends GenericFunctionTerm<BigDe
     implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage.
+   *
+   * @param argument default terms
+   */
+  public BigDecimal10LogarithmFunctionTerm(Term<BigDecimal> argument) {
+    super(argument);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimal10LogarithmFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimal10LogarithmFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

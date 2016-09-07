@@ -14,12 +14,20 @@ import li.kellenberger.formulaevaluator.term.function.GenericFunctionTerm;
 public class BigDecimalSinusFunctionTerm extends GenericFunctionTerm<BigDecimal> implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param term parameter term
+   */
+  public BigDecimalSinusFunctionTerm(Term<BigDecimal> term) {
+    super(term);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalSinusFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalSinusFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

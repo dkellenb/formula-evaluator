@@ -15,12 +15,20 @@ public class BigDecimalHyberbolicCosinusFunctionTerm extends GenericFunctionTerm
     implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param term parameter term
+   */
+  public BigDecimalHyberbolicCosinusFunctionTerm(Term<BigDecimal> term) {
+    super(term);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalHyberbolicCosinusFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalHyberbolicCosinusFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

@@ -15,12 +15,20 @@ public class BigDecimalNaturalLogarithmFunctionTerm extends GenericFunctionTerm<
     implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param term parameter term
+   */
+  public BigDecimalNaturalLogarithmFunctionTerm(Term<BigDecimal> term) {
+    super(term);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalNaturalLogarithmFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalNaturalLogarithmFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

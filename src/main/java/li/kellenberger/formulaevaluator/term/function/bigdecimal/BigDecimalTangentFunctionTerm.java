@@ -14,12 +14,20 @@ import li.kellenberger.formulaevaluator.term.function.GenericFunctionTerm;
 public class BigDecimalTangentFunctionTerm extends GenericFunctionTerm<BigDecimal> implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param term parameter term
+   */
+  public BigDecimalTangentFunctionTerm(Term<BigDecimal> term) {
+    super(term);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalTangentFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalTangentFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

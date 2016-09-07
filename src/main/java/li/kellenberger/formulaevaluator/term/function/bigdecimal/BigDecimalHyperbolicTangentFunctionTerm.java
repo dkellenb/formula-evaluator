@@ -15,12 +15,20 @@ public class BigDecimalHyperbolicTangentFunctionTerm extends GenericFunctionTerm
     implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param term parameter term
+   */
+  public BigDecimalHyperbolicTangentFunctionTerm(Term<BigDecimal> term) {
+    super(term);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalHyperbolicTangentFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalHyperbolicTangentFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

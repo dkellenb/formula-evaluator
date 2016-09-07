@@ -14,12 +14,20 @@ import li.kellenberger.formulaevaluator.term.function.GenericFunctionTerm;
 public class BigDecimalAbsoluteFunctionTerm extends GenericFunctionTerm<BigDecimal> implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage.
+   *
+   * @param argument default terms
+   */
+  public BigDecimalAbsoluteFunctionTerm(Term<BigDecimal> argument) {
+    super(argument);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalAbsoluteFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalAbsoluteFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

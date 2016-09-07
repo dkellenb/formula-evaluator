@@ -30,11 +30,20 @@ public abstract class GenericFunctionTerm<T> implements FunctionTerm<T> {
    */
   @SafeVarargs
   protected GenericFunctionTerm(Term<T>... parameters) {
-    if (parameters.length != getFunction().getNumParams()) {
+    this(asList(parameters));
+  }
+
+  /**
+   * Default c'tor.
+   *
+   * @param parameters all parameters for this function.
+   */
+  protected GenericFunctionTerm(List<Term<T>> parameters) {
+    if (parameters.size() != getFunction().getNumParams()) {
       throw new IllegalArgumentException("Wrong number of parameters got for function '" + getName() + "'."
-        + " Got " + parameters.length + ", but expected " + getFunction().getNumParams());
+        + " Got " + parameters.size() + ", but expected " + getFunction().getNumParams());
     }
-    this.parameters = asList(parameters);
+    this.parameters = parameters;
   }
 
   @Override

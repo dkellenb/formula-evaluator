@@ -14,12 +14,22 @@ import li.kellenberger.formulaevaluator.term.function.GenericFunctionTerm;
 public class BigDecimalIfFunctionTerm extends GenericFunctionTerm<BigDecimal> implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param conditionTerm the term checking the condition
+   * @param ifTerm the term executed if the condition is true
+   * @param elseTerm the term executed if the condition is false
+   */
+  public BigDecimalIfFunctionTerm(Term<BigDecimal> conditionTerm, Term<BigDecimal> ifTerm, Term<BigDecimal> elseTerm) {
+    super(conditionTerm, ifTerm, elseTerm);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalIfFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalIfFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

@@ -18,7 +18,9 @@ import li.kellenberger.formulaevaluator.term.value.ConstantBigDecimalTerm;
 import li.kellenberger.formulaevaluator.valueprovider.BigDecimalVariableValueProvider;
 
 import static java.math.BigDecimal.ONE;
+import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -114,9 +116,9 @@ public class BigDecimalTermFactoryTest {
       unsupportedFunctions.size(), equalTo(0));
   }
 
-  private ConstantBigDecimalTerm[] createConstArgs(Function function) {
+  private List<Term<BigDecimal>> createConstArgs(Function function) {
     Stream<ConstantBigDecimalTerm> argStream = IntStream.range(0, function.getNumParams()).mapToObj(v -> new ConstantBigDecimalTerm(ONE));
-    return argStream.toArray(ConstantBigDecimalTerm[]::new);
+    return argStream.collect(toList());
   }
 
   @Test
@@ -141,7 +143,7 @@ public class BigDecimalTermFactoryTest {
 
     // when
     factory.registerFunction(nullFunction, parameters -> nullTerm);
-    Term<BigDecimal> nullFunctionTerm = factory.getFunctionTerm(nullFunction);
+    Term<BigDecimal> nullFunctionTerm = factory.getFunctionTerm(nullFunction, emptyList());
 
     // then
     assertThat(nullFunctionTerm.printFormula(), equalTo("(null)"));

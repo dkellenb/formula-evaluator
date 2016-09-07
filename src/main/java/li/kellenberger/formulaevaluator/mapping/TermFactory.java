@@ -1,5 +1,8 @@
 package li.kellenberger.formulaevaluator.mapping;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 import li.kellenberger.formulaevaluator.definition.Operator;
@@ -30,7 +33,7 @@ public interface TermFactory<T> {
    * @param parameters parameter terms
    * @return the created term
    */
-  Term<T> getFunctionTerm(Function function, Term<T>... parameters);
+  Term<T> getFunctionTerm(Function function, List<Term<T>> parameters);
 
   /**
    * Returns a variable retrieval term.
@@ -41,12 +44,20 @@ public interface TermFactory<T> {
   Term<T> getVariableTerm(String variable);
 
   /**
-   * Returns a constant term.
+   * Returns a system defined constant term.
    *
-   * @param constant the constant name
+   * @param constantName the name of the registered constant
    * @return the created term
    */
-  Term<T> getConstantTerm(String constant);
+  Term<T> getConstantTerm(String constantName);
+
+  /**
+   * Creates a term with a fixed value.
+   *
+   * @param value the fixed value
+   * @return the term
+   */
+  Term<T> createFixedValueTerm(String value);
 
   /**
    * Registers an additional operation.
@@ -81,6 +92,27 @@ public interface TermFactory<T> {
   void registerConstant(String constant, Supplier<Term<T>> constantTermCreator);
 
   /**
+   * Returns a map of supported operators.
+   *
+   * @return map of supported operators (unmodifiable)
+   */
+  Map<String, Operator> getSupportedOperators();
+
+  /**
+   * Returns a map of supported functions.
+   *
+   * @return map of supported functions (unmodifiable)
+   */
+  Map<String, Function> getSupportedFunctions();
+
+  /**
+   * Returns a map of supported constants.
+   *
+   * @return map of supported constants (unmodifiable)
+   */
+  Set<String> getSupportedConstants();
+
+  /**
    * Operator term creator.
    *
    * @param <T> data type
@@ -112,7 +144,7 @@ public interface TermFactory<T> {
      * @param parameters parameter terms
      * @return the created term
      */
-    Term<T> create(Term<T>... parameters);
+    Term<T> create(List<Term<T>> parameters);
 
   }
 }

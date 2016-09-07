@@ -17,12 +17,20 @@ public class BigDecimalSquareRootFunctionTerm extends GenericFunctionTerm<BigDec
     implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param term parameter term
+   */
+  public BigDecimalSquareRootFunctionTerm(Term<BigDecimal> term) {
+    super(term);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalSquareRootFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalSquareRootFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

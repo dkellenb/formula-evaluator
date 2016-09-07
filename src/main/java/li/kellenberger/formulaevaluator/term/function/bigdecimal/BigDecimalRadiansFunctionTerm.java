@@ -14,12 +14,20 @@ import li.kellenberger.formulaevaluator.term.function.GenericFunctionTerm;
 public class BigDecimalRadiansFunctionTerm extends GenericFunctionTerm<BigDecimal> implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param term parameter term
+   */
+  public BigDecimalRadiansFunctionTerm(Term<BigDecimal> term) {
+    super(term);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalRadiansFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalRadiansFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

@@ -16,12 +16,20 @@ public class BigDecimalFloorFunctionTerm extends GenericFunctionTerm<BigDecimal>
     implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param term parameter term
+   */
+  public BigDecimalFloorFunctionTerm(Term<BigDecimal> term) {
+    super(term);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalFloorFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalFloorFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 

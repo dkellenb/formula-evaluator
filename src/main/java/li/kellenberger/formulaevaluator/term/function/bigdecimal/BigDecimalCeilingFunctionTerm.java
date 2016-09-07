@@ -16,12 +16,20 @@ public class BigDecimalCeilingFunctionTerm extends GenericFunctionTerm<BigDecima
     implements BigDecimalFunction {
 
   /**
+   * C'tor. This one should be used for external usage
+   *
+   * @param term parameter term
+   */
+  public BigDecimalCeilingFunctionTerm(Term<BigDecimal> term) {
+    super(term);
+  }
+
+  /**
    * C'tor.
    *
    * @param parameters parameter terms
    */
-  @SafeVarargs
-  public BigDecimalCeilingFunctionTerm(Term<BigDecimal>... parameters) {
+  BigDecimalCeilingFunctionTerm(List<Term<BigDecimal>> parameters) {
     super(parameters);
   }
 
