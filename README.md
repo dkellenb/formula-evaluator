@@ -107,3 +107,11 @@ Available options:
  
 ## Additional operators and functions
 It is possible to extend the FormulaEvaluator with custom Operators and Functions by registering them in `BigDecimalTermFactory`
+
+## How does it works
+1. In a first step the formula will be parsed and converted into PRN notation
+1. As next based on the PRN a calculation tree is built up which will later be used for the calculations
+1. Now this tree (Term) can be evaluated by passing all variables
+
+## Caching
+Already evaluated and built up terms will be cached to improve future calculations.
