@@ -1,0 +1,6 @@
+{
+  "name": "Formula Evaluator",
+  "tagline": "",
+  "body": "# Formula Evaluator\r\n\r\nInspired by EvalEx the goal of this small library is to offer a simple way how to organize complex formulas in a readable way, without loose too much performance.\r\n\r\nExample:\r\n`FormulaEvaluator.create(\"a * b + c ^ 3\")\r\n                 .with(\"a\", BigDecimal.valueOf(10))\r\n                 .with(\"b\", BigDecimal.valueOf(5.5))\r\n                 .with(\"c\", BigDecimal.valueOf(3))\r\n                 .evalPrecise();`",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
