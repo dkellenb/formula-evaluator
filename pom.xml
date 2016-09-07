@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -10,7 +9,7 @@
 
   <groupId>com.github.dkellenb.formulaevaluator</groupId>
   <artifactId>formula-evaluator</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1-NCA</version>
   <packaging>jar</packaging>
 
   <name>Formula Evaluator</name>
@@ -29,10 +28,12 @@
 
   <scm>
     <connection>scm:git:https://github.com/dkellenb/formula-evaluator.git</connection>
-    <tag>HEAD</tag>
+    <tag>formula-evaluator-0.0.1-NCA</tag>
   </scm>
 
   <properties>
+    <nca.project.id>wup-004-7</nca.project.id>
+
     <jdk.version>1.8</jdk.version>
     <junit.version>4.12</junit.version>
     <lombok.version>1.16.8</lombok.version>
