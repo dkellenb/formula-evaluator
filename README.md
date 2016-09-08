@@ -20,9 +20,9 @@ BigDecimal result = FormulaEvaluator.create("IF(a >= 8, a * betta ^ 3, a / gamma
 Define with which precision the calculations should be performed.
 
 Methods:
-`setPrecision(int)`: Sets calculation and result precision
-`setResultPrecision(int)`: Sets result precision
-`setCalculationPrecision(int)`: Sets calculation precision
+ * `setPrecision(int)`: Sets calculation and result precision
+ * `setResultPrecision(int)`: Sets result precision
+ * `setCalculationPrecision(int)`: Sets calculation precision
 (see [MathContext](https://docs.oracle.com/javase/8/docs/api/java/math/MathContext.html))
 
 #### Rounding modes
