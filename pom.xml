@@ -9,7 +9,7 @@
 
   <groupId>com.github.dkellenb.formulaevaluator</groupId>
   <artifactId>formula-evaluator</artifactId>
-  <version>0.0.2-NCA</version>
+  <version>0.0.3-NCA-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Formula Evaluator</name>
@@ -31,7 +31,7 @@
     <url>
       http://github.com/dkellenb/formula-evaluator
     </url>
-    <tag>formula-evaluator-0.0.2-NCA</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <prerequisites>
