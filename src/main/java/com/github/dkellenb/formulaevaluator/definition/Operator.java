@@ -2,8 +2,7 @@ package com.github.dkellenb.formulaevaluator.definition;
 
 import java.util.Arrays;
 import java.util.List;
-
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
 
 import static java.util.Collections.unmodifiableList;
 
@@ -11,7 +10,6 @@ import static java.util.Collections.unmodifiableList;
  * Definition of a supported operator. An operator is defined by its name (pattern), precedence and if it is
  * left- or right associative.
  */
-@EqualsAndHashCode(of = "operatorName")
 public class Operator {
 
   /**
@@ -124,4 +122,20 @@ public class Operator {
     EQUAL, EQUAL2, NOT_EQUAL, NOT_EQUAL2
   ));
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Operator operator = (Operator) o;
+    return Objects.equals(operatorName, operator.operatorName);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(operatorName);
+  }
 }

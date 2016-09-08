@@ -35,12 +35,12 @@ public class BigDecimalExponentiationOperator
     BigDecimal v2 = exponent.multiply(new BigDecimal(signOf2)); // n2 is now positive
     BigDecimal remainderOf2 = v2.remainder(ONE);
     BigDecimal n2IntPart = v2.subtract(remainderOf2);
-    BigDecimal intPow = base.pow(n2IntPart.intValueExact(), conf.getMathContext());
+    BigDecimal intPow = base.pow(n2IntPart.intValueExact(), conf.getCalculationMathContext());
     BigDecimal doublePow = new BigDecimal(Math.pow(dn1,
       remainderOf2.doubleValue()));
-    BigDecimal power = intPow.multiply(doublePow, conf.getMathContext());
+    BigDecimal power = intPow.multiply(doublePow, conf.getCalculationMathContext());
     if (signOf2 == -1) {
-      power = ONE.divide(power, conf.getMathContext().getPrecision(), RoundingMode.HALF_UP);
+      power = ONE.divide(power, conf.getCalculationMathContext().getPrecision(), RoundingMode.HALF_UP);
     }
     return power;
   }

@@ -26,7 +26,7 @@ public class BigDecimalModuloOperator
   @Override
   public BigDecimal calculateDefault(FormulaEvaluatorConfiguration conf,
                                      BigDecimal numerator, BigDecimal denominator) {
-    return numerator.remainder(denominator, conf.getMathContext());
+    return numerator.remainder(denominator, conf.getCalculationMathContext());
   }
 
   @Override

@@ -27,7 +27,7 @@ public class BigDecimalDivisionOperator
   @Override
   public BigDecimal calculateDefault(FormulaEvaluatorConfiguration conf,
                                      BigDecimal numerator, BigDecimal denominator) {
-    return numerator.divide(denominator, conf.getMathContext());
+    return numerator.divide(denominator, conf.getCalculationMathContext());
   }
 
   @Override

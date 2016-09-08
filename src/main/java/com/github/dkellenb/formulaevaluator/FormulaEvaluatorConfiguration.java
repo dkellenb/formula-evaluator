@@ -3,39 +3,35 @@ package com.github.dkellenb.formulaevaluator;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * Formula Evaluator Configuration.
  */
 public class FormulaEvaluatorConfiguration {
 
-  @Getter
-  private MathContext mathContext = MathContext.DECIMAL128;
+  private MathContext calculationMathContext = MathContext.DECIMAL128;
 
-  @Getter
   private MathContext resultMathContext = MathContext.DECIMAL32;
 
-  @Getter
-  @Setter
   private DefaultNullHandling defaultNullHandling = DefaultNullHandling.EXCEPTION;
 
-  @Getter
-  @Setter
   private BasicOperationsNullHandling plusMinusNullHandling = BasicOperationsNullHandling.INHERIT;
 
-  @Getter
-  @Setter
   private BasicOperationsNullHandling multiplicationNullHandling = BasicOperationsNullHandling.INHERIT;
 
-  @Getter
-  @Setter
   private BasicOperationsNullHandling divisionNullHandling = BasicOperationsNullHandling.INHERIT;
 
-  @Getter
-  @Setter
   private DivisionByZeroHandling divisionByZeroHandling = DivisionByZeroHandling.INHERIT;
+
+  /**
+   * Sets the default handling for null values.
+   *
+   * @param handling the handling option
+   * @return self
+   */
+  public FormulaEvaluatorConfiguration setDefaultNullHandling(DefaultNullHandling handling) {
+    this.defaultNullHandling = handling;
+    return this;
+  }
 
   /**
    * Sets the precision for expression evaluation.
@@ -43,11 +39,21 @@ public class FormulaEvaluatorConfiguration {
    * @param precision the new precision.
    */
   public void setPrecision(int precision) {
-    mathContext = new MathContext(precision, mathContext.getRoundingMode());
+    calculationMathContext = new MathContext(precision, calculationMathContext.getRoundingMode());
+    resultMathContext = calculationMathContext;
   }
 
   /**
-   * Sets the result precision for expression evaluation.
+   * Sets the calculation precision for expression evaluation.
+   *
+   * @param precision the new result precision
+   */
+  public void setCalculationPrecision(int precision) {
+    resultMathContext = new MathContext(precision, resultMathContext.getRoundingMode());
+  }
+
+  /**
+   * Sets the result and calculation precision for expression evaluation.
    *
    * @param precision the new result precision
    */
@@ -61,8 +67,108 @@ public class FormulaEvaluatorConfiguration {
    * @param roundingMode the new rounding mode.
    */
   public void setRoundingMode(RoundingMode roundingMode) {
-    mathContext = new MathContext(mathContext.getPrecision(), roundingMode);
+    calculationMathContext = new MathContext(calculationMathContext.getPrecision(), roundingMode);
     resultMathContext = new MathContext(resultMathContext.getPrecision(), roundingMode);
+  }
+
+  /**
+   * Sets the default handling for + and - operations for null values.
+   *
+   * @param handling the handling option
+   * @return self
+   */
+  public FormulaEvaluatorConfiguration setPlusMinusNullHandling(BasicOperationsNullHandling handling) {
+    this.plusMinusNullHandling = handling;
+    return this;
+  }
+
+  /**
+   * Sets the default handling for * and ^ operations for null values.
+   *
+   * @param handling the handling option
+   * @return self
+   */
+  public FormulaEvaluatorConfiguration setMultiplicationNullHandling(BasicOperationsNullHandling handling) {
+    this.multiplicationNullHandling = handling;
+    return this;
+  }
+
+  /**
+   * Sets the default handling for / and % operations for null values.
+   *
+   * @param handling the handling option
+   * @return self
+   */
+  public FormulaEvaluatorConfiguration setDivisionNullHandling(BasicOperationsNullHandling handling) {
+    this.divisionNullHandling = handling;
+    return this;
+  }
+
+  /**
+   * Sets the default handling for / and % operations for division by zero.
+   *
+   * @param handling the handling option
+   * @return self
+   */
+  public FormulaEvaluatorConfiguration setDivisionByZeroHandling(DivisionByZeroHandling handling) {
+    this.divisionByZeroHandling = handling;
+    return this;
+  }
+
+  /**
+   * Gets the MathContext used for calculations.
+   * @return not null
+   */
+  public MathContext getCalculationMathContext() {
+    return calculationMathContext;
+  }
+
+  /**
+   * Gets the MathContext used for rounding at the end.
+   * @return not null
+   */
+  public MathContext getResultMathContext() {
+    return resultMathContext;
+  }
+
+  /**
+   * Gets the configuration for the default null handling.
+   * @return not null
+   */
+  public DefaultNullHandling getDefaultNullHandling() {
+    return defaultNullHandling;
+  }
+
+  /**
+   * Gets the configuration for the default null handling in + and - operations.
+   * @return not null
+   */
+  public BasicOperationsNullHandling getPlusMinusNullHandling() {
+    return plusMinusNullHandling;
+  }
+
+  /**
+   * Gets the configuration for the default null handling in * and ^ operations.
+   * @return not null
+   */
+  public BasicOperationsNullHandling getMultiplicationNullHandling() {
+    return multiplicationNullHandling;
+  }
+
+  /**
+   * Gets the configuration for the default null handling in / and % operations.
+   * @return not null
+   */
+  public BasicOperationsNullHandling getDivisionNullHandling() {
+    return divisionNullHandling;
+  }
+
+  /**
+   * Gets the configuration for the division by zero handling in / and % operations.
+   * @return not null
+   */
+  public DivisionByZeroHandling getDivisionByZeroHandling() {
+    return divisionByZeroHandling;
   }
 
   /**

@@ -62,15 +62,6 @@ public class FormulaEvaluator {
    *
    * @return The result of the expression.
    */
-  public BigDecimal eval() {
-    return evalRounded();
-  }
-
-  /**
-   * Evaluates the expression.
-   *
-   * @return The result of the expression.
-   */
   public BigDecimal evalRounded() {
     BigDecimal preciseValue = evalPrecise();
     return preciseValue == null ? null : preciseValue.round(configuration.getResultMathContext()).stripTrailingZeros();
@@ -185,6 +176,7 @@ public class FormulaEvaluator {
    * @return the formula evaluator, allows to chain methods.
    */
   public FormulaEvaluator setRoundingMode(RoundingMode roundingMode) {
+    checkNotNull(roundingMode, "RoundingMode cannot be null");
     this.configuration.setRoundingMode(roundingMode);
     return this;
   }
@@ -196,6 +188,7 @@ public class FormulaEvaluator {
    * @return the formula evaluator, allows to chain methods.
    */
   public FormulaEvaluator setDefaultNullHandling(FormulaEvaluatorConfiguration.DefaultNullHandling nullHandling) {
+    checkNotNull(nullHandling, "Handling is not allowed to be undefined");
     this.configuration.setDefaultNullHandling(nullHandling);
     return this;
   }
@@ -207,7 +200,8 @@ public class FormulaEvaluator {
    * @return the formula evaluator, allows to chain methods.
    */
   public FormulaEvaluator setPlusMinusNullHandling(
-    FormulaEvaluatorConfiguration.BasicOperationsNullHandling nullHandling) {
+      FormulaEvaluatorConfiguration.BasicOperationsNullHandling nullHandling) {
+    checkNotNull(nullHandling, "Handling is not allowed to be undefined");
     this.configuration.setPlusMinusNullHandling(nullHandling);
     return this;
   }
@@ -219,7 +213,8 @@ public class FormulaEvaluator {
    * @return the formula evaluator, allows to chain methods.
    */
   public FormulaEvaluator setMultiplicationNullHandling(
-    FormulaEvaluatorConfiguration.BasicOperationsNullHandling nullHandling) {
+      FormulaEvaluatorConfiguration.BasicOperationsNullHandling nullHandling) {
+    checkNotNull(nullHandling, "Handling is not allowed to be undefined");
     this.configuration.setMultiplicationNullHandling(nullHandling);
     return this;
   }
@@ -231,7 +226,8 @@ public class FormulaEvaluator {
    * @return the formula evaluator, allows to chain methods.
    */
   public FormulaEvaluator setDivisionNullHandling(
-    FormulaEvaluatorConfiguration.BasicOperationsNullHandling nullHandling) {
+      FormulaEvaluatorConfiguration.BasicOperationsNullHandling nullHandling) {
+    checkNotNull(nullHandling, "Handling is not allowed to be undefined");
     this.configuration.setDivisionNullHandling(nullHandling);
     return this;
   }
@@ -239,13 +235,20 @@ public class FormulaEvaluator {
   /**
    * Sets additional handling rules for division if default division by zero handling is not set.
    *
-   * @param divisionByZeroHandling the new devision by zero handling.
+   * @param divisionByZeroHandling the new division by zero handling.
    * @return the formula evaluator, allows to chain methods.
    */
   public FormulaEvaluator setDivisionByZeroHandling(
-    FormulaEvaluatorConfiguration.DivisionByZeroHandling divisionByZeroHandling) {
+      FormulaEvaluatorConfiguration.DivisionByZeroHandling divisionByZeroHandling) {
+    checkNotNull(divisionByZeroHandling, "Handling is not allowed to be undefined");
     this.configuration.setDivisionByZeroHandling(divisionByZeroHandling);
     return this;
+  }
+
+  private static void checkNotNull(Object value, String message) {
+    if (value == null) {
+      throw new IllegalArgumentException(message);
+    }
   }
 
 }

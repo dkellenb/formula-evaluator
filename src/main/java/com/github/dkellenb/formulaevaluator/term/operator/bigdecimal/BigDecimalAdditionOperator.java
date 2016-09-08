@@ -26,7 +26,7 @@ public class BigDecimalAdditionOperator
 
   @Override
   public BigDecimal calculateDefault(FormulaEvaluatorConfiguration conf, BigDecimal summand1, BigDecimal summand2) {
-    return summand1.add(summand2, conf.getMathContext());
+    return summand1.add(summand2, conf.getCalculationMathContext());
   }
 
 }

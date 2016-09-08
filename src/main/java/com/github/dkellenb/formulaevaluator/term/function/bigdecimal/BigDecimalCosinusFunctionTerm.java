@@ -39,7 +39,7 @@ public class BigDecimalCosinusFunctionTerm extends GenericFunctionTerm<BigDecima
   @Override
   public BigDecimal calculateDefault(FormulaEvaluatorConfiguration conf, List<BigDecimal> parameters) {
     double d = Math.cos(Math.toRadians(parameters.get(0).doubleValue()));
-    return new BigDecimal(d, conf.getMathContext());
+    return new BigDecimal(d, conf.getCalculationMathContext());
   }
 
 }

@@ -2,8 +2,7 @@ package com.github.dkellenb.formulaevaluator.definition;
 
 import java.util.Arrays;
 import java.util.List;
-
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
 
 import static java.util.Collections.unmodifiableList;
 
@@ -11,7 +10,6 @@ import static java.util.Collections.unmodifiableList;
  * Abstract definition of a supported expression function. A function is defined by a name, the number of parameters and
  * the actual processing implementation.
  */
-@EqualsAndHashCode(of = "name")
 public class Function {
 
   /**
@@ -120,5 +118,22 @@ public class Function {
     MAX, MIN, ABS, LOG, LOG10,
     ROUND, FLOOR, CEILING, SQRT
   ));
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Function function = (Function) o;
+    return Objects.equals(name, function.name);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name);
+  }
 
 }

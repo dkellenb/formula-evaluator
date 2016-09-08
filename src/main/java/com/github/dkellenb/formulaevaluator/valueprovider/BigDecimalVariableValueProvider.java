@@ -43,9 +43,7 @@ public final class BigDecimalVariableValueProvider implements VariableValueProvi
    * @return itself
    */
   public BigDecimalVariableValueProvider with(String variable, BigDecimal value) {
-    if (value != null) {
-      map.put(variable, value);
-    }
+    map.put(variable, value);
     return this;
   }
 

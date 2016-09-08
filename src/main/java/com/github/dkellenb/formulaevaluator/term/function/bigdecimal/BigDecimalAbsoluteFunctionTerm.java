@@ -39,7 +39,7 @@ public class BigDecimalAbsoluteFunctionTerm extends GenericFunctionTerm<BigDecim
   @Override
   public BigDecimal calculateDefault(FormulaEvaluatorConfiguration conf, List<BigDecimal> parameters) {
     BigDecimal v1 = parameters.get(0);
-    return v1.abs(conf.getMathContext());
+    return v1.abs(conf.getCalculationMathContext());
   }
 
 }

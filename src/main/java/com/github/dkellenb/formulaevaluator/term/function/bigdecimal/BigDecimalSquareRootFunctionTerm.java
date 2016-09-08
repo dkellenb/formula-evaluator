@@ -48,7 +48,7 @@ public class BigDecimalSquareRootFunctionTerm extends GenericFunctionTerm<BigDec
     if (x.signum() < 0) {
       throw new ArithmeticException("Argument to SQRT() function must not be negative");
     }
-    BigInteger n = x.movePointRight(conf.getMathContext().getPrecision() << 1).toBigInteger();
+    BigInteger n = x.movePointRight(conf.getCalculationMathContext().getPrecision() << 1).toBigInteger();
     int bits = (n.bitLength() + 1) >> 1;
     BigInteger ix = n.shiftRight(bits);
     BigInteger ixPrev;
@@ -58,7 +58,7 @@ public class BigDecimalSquareRootFunctionTerm extends GenericFunctionTerm<BigDec
       // Give other threads a chance to work;
       Thread.yield();
     } while (ix.compareTo(ixPrev) != 0);
-    return new BigDecimal(ix, conf.getMathContext().getPrecision());
+    return new BigDecimal(ix, conf.getCalculationMathContext().getPrecision());
   }
 
 }
