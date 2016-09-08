@@ -21,6 +21,18 @@
     <url>http://netzgestaltung.ch</url>
   </organization>
 
+  <scm>
+    <connection>
+      scm:git:ssh://github.com/dkellenb/formula-evaluator.git
+    </connection>
+    <developerConnection>
+      scm:git:ssh://git@github.com/dkellenb/formula-evaluator.git
+    </developerConnection>
+    <url>
+      http://github.com/dkellenb/formula-evaluator
+    </url>
+  </scm>
+
   <prerequisites>
     <!-- Use 'mvn versions:display-plugin-updates' to find minimal version depending by used plugins. -->
     <maven>3.1.3</maven>
