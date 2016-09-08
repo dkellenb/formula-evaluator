@@ -35,7 +35,7 @@ public abstract class GenericStackableOperatorTerm<T> extends GenericOperatorTer
       return base.evaluate(input, conf);
     }
 
-    // Simple case: Only one subtrahend
+    // Simple case: Only one applicant
     if (applicants.length == 1) {
       return calculate(conf, base.evaluate(input, conf), applicants[0].evaluate(input, conf));
     }
