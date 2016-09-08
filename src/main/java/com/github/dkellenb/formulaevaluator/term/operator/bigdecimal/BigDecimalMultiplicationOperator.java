@@ -27,7 +27,7 @@ public class BigDecimalMultiplicationOperator
   @Override
   public BigDecimal calculateDefault(FormulaEvaluatorConfiguration conf,
                                      BigDecimal multiplier, BigDecimal multiplicant) {
-    return multiplier.multiply(multiplicant, conf.getMathContext());
+    return multiplier.multiply(multiplicant, conf.getCalculationMathContext());
   }
 
 }

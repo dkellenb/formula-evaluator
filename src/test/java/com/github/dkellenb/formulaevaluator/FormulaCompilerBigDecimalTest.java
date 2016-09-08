@@ -8,6 +8,10 @@ import org.junit.Test;
 import com.github.dkellenb.formulaevaluator.term.Term;
 import com.github.dkellenb.formulaevaluator.valueprovider.BigDecimalVariableValueProvider;
 
+import static com.github.dkellenb.formulaevaluator.FormulaEvaluatorConfiguration.DefaultNullHandling.ZERO;
+import static com.github.dkellenb.formulaevaluator.valueprovider.BigDecimalVariableValueProvider.createValueProvider;
+import static java.math.BigDecimal.ONE;
+import static java.math.BigDecimal.TEN;
 import static java.util.Collections.emptySet;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -38,7 +42,7 @@ public class FormulaCompilerBigDecimalTest {
     // given
     String formula = "a";
     BigDecimal eight = new BigDecimal(8);
-    BigDecimalVariableValueProvider valueProvider = BigDecimalVariableValueProvider.createValueProvider().with("a", eight);
+    BigDecimalVariableValueProvider valueProvider = createValueProvider().with("a", eight);
 
     // when
     Term<BigDecimal> compiledFormula = FormulaCompiler.compile(formula, "a");
@@ -88,6 +92,21 @@ public class FormulaCompilerBigDecimalTest {
     // then
     assertThat(compiledFormula.printFormula(), equalTo("MAX(2,(3+1))"));
     assertThat(compiledFormula.evaluate(NO_VALUE_PROVIDER, DEFAULT_CONFIGURATION), equalTo(four));
+  }
+
+  @Test
+  public void shouldCreateTreeWithVariables() {
+    // given
+    String formula = "a + b * c";
+    BigDecimalVariableValueProvider valueProvider = createValueProvider().with("a", ONE).with("b", null).with("c", TEN);
+    FormulaEvaluatorConfiguration config = new FormulaEvaluatorConfiguration().setDefaultNullHandling(ZERO);
+
+    // when
+    Term<BigDecimal> compiledFormula = FormulaCompiler.compile(formula, "a", "b", "c");
+
+    // then
+    assertThat(compiledFormula.printFormula(), equalTo("(a+(b*c))"));
+    assertThat(compiledFormula.evaluate(valueProvider, config), equalTo(ONE));
   }
 
   private static final class NoValueProvider implements VariableValueProvider {

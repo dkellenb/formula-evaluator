@@ -26,7 +26,7 @@ public class BigDecimalSubtractionOperator
 
   @Override
   public BigDecimal calculateDefault(FormulaEvaluatorConfiguration conf, BigDecimal v1, BigDecimal v2) {
-    return v1.subtract(v2, conf.getMathContext());
+    return v1.subtract(v2, conf.getCalculationMathContext());
   }
 
 }

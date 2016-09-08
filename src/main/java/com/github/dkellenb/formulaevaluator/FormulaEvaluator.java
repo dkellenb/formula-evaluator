@@ -62,15 +62,6 @@ public class FormulaEvaluator {
    *
    * @return The result of the expression.
    */
-  public BigDecimal eval() {
-    return evalRounded();
-  }
-
-  /**
-   * Evaluates the expression.
-   *
-   * @return The result of the expression.
-   */
   public BigDecimal evalRounded() {
     BigDecimal preciseValue = evalPrecise();
     return preciseValue == null ? null : preciseValue.round(configuration.getResultMathContext()).stripTrailingZeros();

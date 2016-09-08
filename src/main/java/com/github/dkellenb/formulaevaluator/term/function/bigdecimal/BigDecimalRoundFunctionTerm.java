@@ -44,7 +44,7 @@ public class BigDecimalRoundFunctionTerm extends GenericFunctionTerm<BigDecimal>
     BigDecimal precisionAsDecimal = parameters.get(1);
 
     int precision = precisionAsDecimal.intValue();
-    return toRound.setScale(precision, conf.getMathContext().getRoundingMode());
+    return toRound.setScale(precision, conf.getCalculationMathContext().getRoundingMode());
   }
 
 }

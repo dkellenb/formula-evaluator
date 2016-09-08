@@ -41,7 +41,7 @@ public class BigDecimalNaturalLogarithmFunctionTerm extends GenericFunctionTerm<
   public BigDecimal calculateDefault(FormulaEvaluatorConfiguration conf, List<BigDecimal> parameters) {
     BigDecimal v1 = parameters.get(0);
     double d = Math.log(v1.doubleValue());
-    return new BigDecimal(d, conf.getMathContext());
+    return new BigDecimal(d, conf.getCalculationMathContext());
   }
 
 }

@@ -37,7 +37,7 @@ public class BigDecimalRandomFunctionTerm extends GenericFunctionTerm<BigDecimal
   @Override
   public BigDecimal calculateDefault(FormulaEvaluatorConfiguration conf, List<BigDecimal> parameters) {
     double d = Math.random();
-    return new BigDecimal(d, conf.getMathContext());
+    return new BigDecimal(d, conf.getCalculationMathContext());
   }
 
 }
