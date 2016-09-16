@@ -32,7 +32,7 @@ public class Operator {
    *
    * @param operatorName the operator name (pattern).
    * @param precedence the operators precedence.
-   * @param leftAssoc @code{true} if the operator is left associative, else @code{false}.
+   * @param leftAssoc {@code true} if the operator is left associative, else {@code false}.
    */
   public Operator(String operatorName, int precedence, boolean leftAssoc) {
     this.operatorName = operatorName;
@@ -61,7 +61,7 @@ public class Operator {
   /**
    * Operator is left associative.
    *
-   * @return @code{true} if the operator is left associative, else @code{false}.
+   * @return {@code true} if the operator is left associative, else {@code false}.
    */
   public boolean isLeftAssoc() {
     return leftAssoc;

@@ -8,7 +8,7 @@ import com.github.dkellenb.formulaevaluator.term.Term;
 import com.github.dkellenb.formulaevaluator.term.operator.GenericStackableOperatorTerm;
 
 /**
- * BigDecimal > Operator.
+ * BigDecimal &gt; Operator.
  */
 public class BigDecimalGreaterOperator extends GenericStackableOperatorTerm<BigDecimal>
   implements BigDecimalOperator {

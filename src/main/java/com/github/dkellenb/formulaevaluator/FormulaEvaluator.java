@@ -27,7 +27,7 @@ public class FormulaEvaluator {
   /**
    * Creates a new formula instance from an formula string.
    *
-   * @param formula The formula. E.g. @code{"2.4*sin(3)/(2-4)"} or @code{"sin(y)>0 & max(z, 3)>3"}
+   * @param formula The formula. E.g. {@code 2.4*sin(3)/(2-4)} or {@code sin(y)&gt;0 & max(z, 3)&gt;3}
    */
   protected FormulaEvaluator(String formula) {
     this.formula = formula;
@@ -37,7 +37,7 @@ public class FormulaEvaluator {
   /**
    * Creates a new formula instance from an formula string.
    *
-   * @param formula The formula. E.g. @code{"2.4*sin(3)/(2-4)"} or @code{"sin(y)>0 & max(z, 3)>3"}
+   * @param formula The formula. E.g. {@code 2.4*sin(3)/(2-4)} or {@code sin(y)&gt;0 & max(z, 3)&gt;3}
    * @return formula evaluator
    */
   public static FormulaEvaluator create(String formula) {
