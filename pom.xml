@@ -44,7 +44,7 @@
 
   <prerequisites>
     <!-- Use 'mvn versions:display-plugin-updates' to find minimal version depending by used plugins. -->
-    <maven>3.1.3</maven>
+    <maven>3.0.5</maven>
   </prerequisites>
 
   <properties>
