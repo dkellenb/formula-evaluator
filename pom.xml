@@ -16,16 +16,24 @@
   </organization>
 
   <scm>
-    <connection>
-      scm:git:ssh://github.com/dkellenb/formula-evaluator.git
-    </connection>
-    <developerConnection>
-      scm:git:ssh://git@github.com/dkellenb/formula-evaluator.git
-    </developerConnection>
-    <url>
-      http://github.com/dkellenb/formula-evaluator
-    </url>
+    <connection>scm:git:ssh://github.com/dkellenb/formula-evaluator.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/dkellenb/formula-evaluator.git</developerConnection>
+    <url>http://github.com/dkellenb/formula-evaluator</url>
   </scm>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Daniel Kellenberger</name>
+      <email>daniel@kellenberger.li</email>
+    </developer>
+  </developers>
 
   <prerequisites>
     <!-- Use 'mvn versions:display-plugin-updates' to find minimal version depending by used plugins. -->
@@ -39,6 +47,9 @@
     <maven-release-plugin.version>2.5.1</maven-release-plugin.version>
     <maven-resources-plugin.version>2.7</maven-resources-plugin.version>
     <maven-scm-plugin.version>1.9.2</maven-scm-plugin.version>
+    <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+    <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+    <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
   </properties>
 
   <build>
@@ -71,8 +82,50 @@
         <artifactId>maven-scm-plugin</artifactId>
         <version>${maven-scm-plugin.version}</version>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${maven-source-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven-javadoc-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>${maven-gpg-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
