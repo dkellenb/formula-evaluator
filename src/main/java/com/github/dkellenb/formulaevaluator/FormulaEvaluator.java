@@ -14,13 +14,15 @@ import com.github.dkellenb.formulaevaluator.valueprovider.BigDecimalVariableValu
  */
 public class FormulaEvaluator {
 
+  private static final FormulaEvaluatorConfiguration DEFAULT_CONFIGURATION = new FormulaEvaluatorConfiguration(false);
+
   private final String formula;
   private final BigDecimalVariableValueProvider valueProvider;
 
   /**
    * Configuration for the formula evaluation.
    */
-  private final FormulaEvaluatorConfiguration configuration = new FormulaEvaluatorConfiguration();
+  private FormulaEvaluatorConfiguration configuration = DEFAULT_CONFIGURATION;
 
   /**
    * Creates a new formula instance from an formula string.
@@ -43,28 +45,15 @@ public class FormulaEvaluator {
   }
 
   /**
-   * Creates new FormulaEvaluator with the given formula and precision.
-   *
-   * @param formula given formula
-   * @param precision given precision
-   * @return new FormulaEvaluator
-   * */
-  public static FormulaEvaluator create(String formula, int precision) {
-    FormulaEvaluator evaluator = new FormulaEvaluator(formula);
-    evaluator.setDefaultNullHandling(FormulaEvaluatorConfiguration.DefaultNullHandling.NULL)
-      .setRoundingMode(RoundingMode.HALF_UP)
-      .setResultPrecision(precision);
-    return evaluator;
-  }
-
-  /**
    * Evaluates the expression.
    *
    * @return The result of the expression.
    */
   public BigDecimal evalRounded() {
     BigDecimal preciseValue = evalPrecise();
-    return preciseValue == null ? null : preciseValue.round(configuration.getResultMathContext()).stripTrailingZeros();
+    return preciseValue == null
+      ? null
+      : preciseValue.round(this.configuration.getResultMathContext()).stripTrailingZeros();
   }
 
   /**
@@ -75,7 +64,7 @@ public class FormulaEvaluator {
   public BigDecimal evalPrecise() {
     Set<String> variables = valueProvider.getVariables();
     Term<BigDecimal> term = BigDecimalCachedFormulaCompiler.getTerm(formula, variables);
-    BigDecimal result = term.evaluate(valueProvider, configuration);
+    BigDecimal result = term.evaluate(valueProvider, this.configuration);
     return result == null
       ? null
       : result.stripTrailingZeros();
@@ -146,14 +135,62 @@ public class FormulaEvaluator {
   }
 
   /**
+   * Returns the formula evaluator configuration (we cannot guarantee that it will not be modified, therefore
+   * we return a new instance).
+   *
+   * @return the formula evaluator configuration
+   */
+  public FormulaEvaluatorConfiguration getConfiguration() {
+    modifiableConfiguration();
+    return configuration;
+  }
+
+  /**
+   * Creates a cloned configuration and make it therefore modifiable.
+   */
+  private void modifiableConfiguration() {
+    if (!this.configuration.isModifiable()) {
+      this.configuration = new FormulaEvaluatorConfiguration(this.configuration);
+    }
+  }
+
+
+  /**
+   * Sets a new formula evaluator configuration.
+   *
+   * @param configuration the new configuration to be used
+   * @return this formula evaluator instance in order to allow to chaining methods.
+   */
+  public FormulaEvaluator setConfiguration(FormulaEvaluatorConfiguration configuration) {
+    checkNotNull(configuration, "Formula evaluator configuration should never be null");
+    if (!configuration.isModifiable()) {
+      this.configuration = new FormulaEvaluatorConfiguration(configuration);
+    }
+    this.configuration = configuration;
+    return this;
+  }
+
+  /**
    * Sets the precision during the formula evaluation. Sets also the precision of the result.
    *
    * @param precision the new precision.
-   * @return The formula evaluator, allows to chain methods.
+   * @return this formula evaluator instance in order to allow to chaining methods.
    */
   public FormulaEvaluator setPrecision(int precision) {
+    modifiableConfiguration();
     this.configuration.setPrecision(precision);
-    this.configuration.setResultPrecision(precision);
+    return this;
+  }
+
+  /**
+   * Sets the precision during the formula evaluation.
+   *
+   * @param precision the new precision.
+   * @return this formula evaluator instance in order to allow to chaining methods.
+   */
+  public FormulaEvaluator setCalculationPrecision(int precision) {
+    modifiableConfiguration();
+    this.configuration.setCalculationPrecision(precision);
     return this;
   }
 
@@ -162,9 +199,10 @@ public class FormulaEvaluator {
    * setPrecision().
    *
    * @param precision the new precision.
-   * @return The formula evaluator, allows to chain methods.
+   * @return this formula evaluator instance in order to allow to chaining methods.
    */
   public FormulaEvaluator setResultPrecision(int precision) {
+    modifiableConfiguration();
     this.configuration.setResultPrecision(precision);
     return this;
   }
@@ -173,11 +211,12 @@ public class FormulaEvaluator {
    * Sets the rounding mode for formula evaluation.
    *
    * @param roundingMode the new rounding mode.
-   * @return the formula evaluator, allows to chain methods.
+   * @return this formula evaluator instance in order to allow to chaining methods.
    */
   public FormulaEvaluator setRoundingMode(RoundingMode roundingMode) {
     checkNotNull(roundingMode, "RoundingMode cannot be null");
-    this.configuration.setRoundingMode(roundingMode);
+    modifiableConfiguration();
+    configuration.setRoundingMode(roundingMode);
     return this;
   }
 
@@ -185,11 +224,12 @@ public class FormulaEvaluator {
    * Sets the default null handling.
    *
    * @param nullHandling the new null handling.
-   * @return the formula evaluator, allows to chain methods.
+   * @return this formula evaluator instance in order to allow to chaining methods.
    */
   public FormulaEvaluator setDefaultNullHandling(FormulaEvaluatorConfiguration.DefaultNullHandling nullHandling) {
     checkNotNull(nullHandling, "Handling is not allowed to be undefined");
-    this.configuration.setDefaultNullHandling(nullHandling);
+    modifiableConfiguration();
+    configuration.setDefaultNullHandling(nullHandling);
     return this;
   }
 
@@ -197,12 +237,13 @@ public class FormulaEvaluator {
    * Sets additional handling rules for plus / minus if default null handling is not set.
    *
    * @param nullHandling the new null handling.
-   * @return the formula evaluator, allows to chain methods.
+   * @return this formula evaluator instance in order to allow to chaining methods.
    */
   public FormulaEvaluator setPlusMinusNullHandling(
       FormulaEvaluatorConfiguration.BasicOperationsNullHandling nullHandling) {
     checkNotNull(nullHandling, "Handling is not allowed to be undefined");
-    this.configuration.setPlusMinusNullHandling(nullHandling);
+    modifiableConfiguration();
+    configuration.setPlusMinusNullHandling(nullHandling);
     return this;
   }
 
@@ -210,12 +251,13 @@ public class FormulaEvaluator {
    * Sets additional handling rules for multiplication if default null handling is not set.
    *
    * @param nullHandling the new null handling.
-   * @return the formula evaluator, allows to chain methods.
+   * @return this formula evaluator instance in order to allow to chaining methods.
    */
   public FormulaEvaluator setMultiplicationNullHandling(
       FormulaEvaluatorConfiguration.BasicOperationsNullHandling nullHandling) {
     checkNotNull(nullHandling, "Handling is not allowed to be undefined");
-    this.configuration.setMultiplicationNullHandling(nullHandling);
+    modifiableConfiguration();
+   configuration.setMultiplicationNullHandling(nullHandling);
     return this;
   }
 
@@ -223,12 +265,13 @@ public class FormulaEvaluator {
    * Sets additional handling rules for division if default null handling is not set.
    *
    * @param nullHandling the new null handling.
-   * @return the formula evaluator, allows to chain methods.
+   * @return this formula evaluator instance in order to allow to chaining methods.
    */
   public FormulaEvaluator setDivisionNullHandling(
       FormulaEvaluatorConfiguration.BasicOperationsNullHandling nullHandling) {
     checkNotNull(nullHandling, "Handling is not allowed to be undefined");
-    this.configuration.setDivisionNullHandling(nullHandling);
+    modifiableConfiguration();
+    configuration.setDivisionNullHandling(nullHandling);
     return this;
   }
 
@@ -236,12 +279,13 @@ public class FormulaEvaluator {
    * Sets additional handling rules for division if default division by zero handling is not set.
    *
    * @param divisionByZeroHandling the new division by zero handling.
-   * @return the formula evaluator, allows to chain methods.
+   * @return this formula evaluator instance in order to allow to chaining methods.
    */
   public FormulaEvaluator setDivisionByZeroHandling(
       FormulaEvaluatorConfiguration.DivisionByZeroHandling divisionByZeroHandling) {
     checkNotNull(divisionByZeroHandling, "Handling is not allowed to be undefined");
-    this.configuration.setDivisionByZeroHandling(divisionByZeroHandling);
+    modifiableConfiguration();
+    configuration.setDivisionByZeroHandling(divisionByZeroHandling);
     return this;
   }
 

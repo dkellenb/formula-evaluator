@@ -22,6 +22,54 @@ public class FormulaEvaluatorConfiguration {
 
   private DivisionByZeroHandling divisionByZeroHandling = DivisionByZeroHandling.INHERIT;
 
+  private boolean modifiable = true;
+
+  /**
+   * Default c'tor with default values.
+   */
+  public FormulaEvaluatorConfiguration() {
+
+  }
+
+  /**
+   * Modifiable c'tor.
+   *
+   * @param modifiable if instance shall be modifiable
+   */
+  FormulaEvaluatorConfiguration(boolean modifiable) {
+    this.modifiable = modifiable;
+  }
+
+  /**
+   * Copy c'tor.
+   *
+   * @param configuration the configuration to be copied
+   */
+  public FormulaEvaluatorConfiguration(FormulaEvaluatorConfiguration configuration) {
+    this.calculationMathContext = configuration.calculationMathContext;
+    this.resultMathContext = configuration.resultMathContext;
+    this.defaultNullHandling = configuration.defaultNullHandling;
+    this.plusMinusNullHandling = configuration.plusMinusNullHandling;
+    this.multiplicationNullHandling = configuration.multiplicationNullHandling;
+    this.divisionNullHandling = configuration.divisionNullHandling;
+    this.divisionByZeroHandling = configuration.divisionByZeroHandling;
+  }
+
+  /**
+   * Sets the status of this configuration to be not modifiable (Based on the value at construction or accpetance time).
+   */
+  public void setUnmodifiable() {
+    this.modifiable = false;
+  }
+
+  /**
+   * Returns @code{true} if instance is modifiable.
+   * @return @code{true} if modifiable
+   */
+  boolean isModifiable() {
+    return this.modifiable;
+  }
+
   /**
    * Sets the default handling for null values.
    *
@@ -29,6 +77,7 @@ public class FormulaEvaluatorConfiguration {
    * @return self
    */
   public FormulaEvaluatorConfiguration setDefaultNullHandling(DefaultNullHandling handling) {
+    checkModifiable();
     this.defaultNullHandling = handling;
     return this;
   }
@@ -39,6 +88,7 @@ public class FormulaEvaluatorConfiguration {
    * @param precision the new precision.
    */
   public void setPrecision(int precision) {
+    checkModifiable();
     calculationMathContext = new MathContext(precision, calculationMathContext.getRoundingMode());
     resultMathContext = calculationMathContext;
   }
@@ -49,6 +99,7 @@ public class FormulaEvaluatorConfiguration {
    * @param precision the new result precision
    */
   public void setCalculationPrecision(int precision) {
+    checkModifiable();
     resultMathContext = new MathContext(precision, resultMathContext.getRoundingMode());
   }
 
@@ -58,6 +109,7 @@ public class FormulaEvaluatorConfiguration {
    * @param precision the new result precision
    */
   public void setResultPrecision(int precision) {
+    checkModifiable();
     resultMathContext = new MathContext(precision, resultMathContext.getRoundingMode());
   }
 
@@ -67,6 +119,7 @@ public class FormulaEvaluatorConfiguration {
    * @param roundingMode the new rounding mode.
    */
   public void setRoundingMode(RoundingMode roundingMode) {
+    checkModifiable();
     calculationMathContext = new MathContext(calculationMathContext.getPrecision(), roundingMode);
     resultMathContext = new MathContext(resultMathContext.getPrecision(), roundingMode);
   }
@@ -78,6 +131,7 @@ public class FormulaEvaluatorConfiguration {
    * @return self
    */
   public FormulaEvaluatorConfiguration setPlusMinusNullHandling(BasicOperationsNullHandling handling) {
+    checkModifiable();
     this.plusMinusNullHandling = handling;
     return this;
   }
@@ -89,6 +143,7 @@ public class FormulaEvaluatorConfiguration {
    * @return self
    */
   public FormulaEvaluatorConfiguration setMultiplicationNullHandling(BasicOperationsNullHandling handling) {
+    checkModifiable();
     this.multiplicationNullHandling = handling;
     return this;
   }
@@ -100,6 +155,7 @@ public class FormulaEvaluatorConfiguration {
    * @return self
    */
   public FormulaEvaluatorConfiguration setDivisionNullHandling(BasicOperationsNullHandling handling) {
+    checkModifiable();
     this.divisionNullHandling = handling;
     return this;
   }
@@ -111,6 +167,7 @@ public class FormulaEvaluatorConfiguration {
    * @return self
    */
   public FormulaEvaluatorConfiguration setDivisionByZeroHandling(DivisionByZeroHandling handling) {
+    checkModifiable();
     this.divisionByZeroHandling = handling;
     return this;
   }
@@ -169,6 +226,12 @@ public class FormulaEvaluatorConfiguration {
    */
   public DivisionByZeroHandling getDivisionByZeroHandling() {
     return divisionByZeroHandling;
+  }
+
+  private void checkModifiable() {
+    if (!isModifiable()) {
+      throw new IllegalStateException("Tried to modify an unmodifiable evaluator configuration");
+    }
   }
 
   /**
