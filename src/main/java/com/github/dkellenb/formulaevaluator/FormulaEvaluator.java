@@ -135,6 +135,15 @@ public class FormulaEvaluator {
   }
 
   /**
+   * Returns the current formula of this formula evaluator.
+   *
+   * @return the formula.
+   */
+  public String getFormula() {
+    return formula;
+  }
+
+  /**
    * Returns the formula evaluator configuration (we cannot guarantee that it will not be modified, therefore
    * we return a new instance).
    *

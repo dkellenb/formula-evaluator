@@ -56,4 +56,16 @@ public class FormulaEvaluatorTest {
       equalTo(10));
   }
 
+  @Test
+  public void shouldReturnSameFormula() {
+    // given
+    String formula = "a + b / c";
+
+    // when
+    FormulaEvaluator formulaEvaluator = new FormulaEvaluator(formula);
+
+    // then
+    assertThat(formulaEvaluator.getFormula(), equalTo(formula));
+  }
+
 }
