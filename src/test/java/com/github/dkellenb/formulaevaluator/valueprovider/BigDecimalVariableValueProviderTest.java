@@ -48,7 +48,7 @@ public class BigDecimalVariableValueProviderTest {
 
     // when
     BigDecimalVariableValueProvider valueProvider = new BigDecimalVariableValueProvider(map);
-    valueProvider.with("d", null);
+    valueProvider.with("d");
 
     // then
     Set<String> variables = valueProvider.getVariables();

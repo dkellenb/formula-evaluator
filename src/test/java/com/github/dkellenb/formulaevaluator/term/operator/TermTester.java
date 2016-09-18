@@ -1,14 +1,14 @@
 package com.github.dkellenb.formulaevaluator.term.operator;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.hamcrest.core.IsEqual;
 
 import com.github.dkellenb.formulaevaluator.FormulaEvaluatorConfiguration;
+import com.github.dkellenb.formulaevaluator.VariableValueProvider;
 import com.github.dkellenb.formulaevaluator.term.Term;
-import com.github.dkellenb.formulaevaluator.valueprovider.BigDecimalVariableValueProvider;
+import com.github.dkellenb.formulaevaluator.valueprovider.GenericInitOnlyVariableValueProvider;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -19,7 +19,7 @@ import static org.junit.Assert.fail;
 public final class TermTester<T> {
 
   private final Term<T> term;
-  private final Map<String, BigDecimal> values = new HashMap<>();
+  private final Map<String, T> values = new HashMap<>();
   private FormulaEvaluatorConfiguration configuration = new FormulaEvaluatorConfiguration();
 
   /**
@@ -44,7 +44,7 @@ public final class TermTester<T> {
    * @param value value
    * @return this
    */
-  public TermTester<T> with(String variable, BigDecimal value) {
+  public TermTester<T> with(String variable, T value) {
     if (value != null) {
       values.put(variable, value);
     }
@@ -68,7 +68,7 @@ public final class TermTester<T> {
    * @param expectedValue expected value
    */
   public void equalTo(T expectedValue) {
-    BigDecimalVariableValueProvider valueProvider = new BigDecimalVariableValueProvider(values);
+    VariableValueProvider<T, ?> valueProvider = new GenericInitOnlyVariableValueProvider<>(values);
     T value = term.evaluate(valueProvider, configuration);
     assertThat("For formula '" + term.printFormula() + "' with variables: " + valueProvider + " expected result of '"
       + expectedValue + "' does not match.", value, IsEqual.equalTo(expectedValue));
@@ -80,7 +80,7 @@ public final class TermTester<T> {
    * @param expectedException the expected exeption
    */
   public void isThrowing(Class<? extends Exception> expectedException) {
-    BigDecimalVariableValueProvider valueProvider = new BigDecimalVariableValueProvider(values);
+    VariableValueProvider<T, ?> valueProvider = new GenericInitOnlyVariableValueProvider<>(values);
     try {
       T value = term.evaluate(valueProvider, configuration);
       fail("For formula '" + term.printFormula() + "' with variables : " + valueProvider

@@ -7,11 +7,13 @@ import org.junit.Test;
 
 import com.github.dkellenb.formulaevaluator.term.Term;
 import com.github.dkellenb.formulaevaluator.valueprovider.BigDecimalVariableValueProvider;
+import com.github.dkellenb.formulaevaluator.valueprovider.GenericInitOnlyVariableValueProvider;
 
 import static com.github.dkellenb.formulaevaluator.FormulaEvaluatorConfiguration.DefaultNullHandling.ZERO;
 import static com.github.dkellenb.formulaevaluator.valueprovider.BigDecimalVariableValueProvider.createValueProvider;
 import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.TEN;
+import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -98,7 +100,7 @@ public class FormulaCompilerBigDecimalTest {
   public void shouldCreateTreeWithVariables() {
     // given
     String formula = "a + b * c";
-    BigDecimalVariableValueProvider valueProvider = createValueProvider().with("a", ONE).with("b", null).with("c", TEN);
+    BigDecimalVariableValueProvider valueProvider = createValueProvider().with("a", ONE).with("b").with("c", TEN);
     FormulaEvaluatorConfiguration config = new FormulaEvaluatorConfiguration().setDefaultNullHandling(ZERO);
 
     // when
@@ -109,7 +111,12 @@ public class FormulaCompilerBigDecimalTest {
     assertThat(compiledFormula.evaluate(valueProvider, config), equalTo(ONE));
   }
 
-  private static final class NoValueProvider implements VariableValueProvider {
+  private static final class NoValueProvider extends GenericInitOnlyVariableValueProvider<BigDecimal> {
+
+    private NoValueProvider() {
+      super(emptyMap());
+    }
+
     @Override
     public BigDecimal getValue(String variable) {
       throw new UnsupportedOperationException();
@@ -119,6 +126,7 @@ public class FormulaCompilerBigDecimalTest {
     public Set<String> getVariables() {
       return emptySet();
     }
+
   }
 
 }

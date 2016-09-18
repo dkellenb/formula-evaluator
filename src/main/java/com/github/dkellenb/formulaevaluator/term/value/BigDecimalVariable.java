@@ -22,7 +22,7 @@ public class BigDecimalVariable implements Variable<BigDecimal> {
   }
 
   @Override
-  public BigDecimal evaluate(VariableValueProvider input, FormulaEvaluatorConfiguration configuration) {
+  public BigDecimal evaluate(VariableValueProvider<BigDecimal, ?> input, FormulaEvaluatorConfiguration configuration) {
     return input.getValue(variableName);
   }
 

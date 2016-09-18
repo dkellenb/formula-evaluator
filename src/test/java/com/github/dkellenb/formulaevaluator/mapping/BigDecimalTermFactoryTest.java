@@ -131,7 +131,7 @@ public class BigDecimalTermFactoryTest {
     Term<BigDecimal> nullTerm = new Term<BigDecimal>() {
 
       @Override
-      public BigDecimal evaluate(VariableValueProvider input, FormulaEvaluatorConfiguration configuration) {
+      public BigDecimal evaluate(VariableValueProvider<BigDecimal, ?> input, FormulaEvaluatorConfiguration configuration) {
         return null;
       }
 

@@ -1,30 +1,43 @@
 package com.github.dkellenb.formulaevaluator.valueprovider;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.math.MathContext;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import com.github.dkellenb.formulaevaluator.VariableValueProvider;
-
-import static java.util.Collections.emptyMap;
-import static java.util.Collections.unmodifiableSet;
 
 /**
  * HashMap based value provider.
  */
-public final class BigDecimalVariableValueProvider implements VariableValueProvider {
+public final class BigDecimalVariableValueProvider
+    extends GenericVariableValueProvider<BigDecimal, BigDecimalVariableValueProvider> {
 
-  private final Map<String, BigDecimal> map;
+  private final MathContext conversionMathContext;
+
+  /**
+   * C'tor.
+   */
+  public BigDecimalVariableValueProvider() {
+    super();
+    this.conversionMathContext = MathContext.DECIMAL128;
+  }
 
   /**
    * C'tor.
    * @param map default map
    */
   public BigDecimalVariableValueProvider(Map<String, BigDecimal> map) {
-    this.map = new HashMap<>(map);
+    this(map, MathContext.DECIMAL128);
   }
+
+  /**
+   * C'tor.
+   * @param map default map
+   * @param conversionMathContext the math context used for conversion of values
+   */
+  public BigDecimalVariableValueProvider(Map<String, BigDecimal> map, MathContext conversionMathContext) {
+    super(map);
+    this.conversionMathContext = conversionMathContext;
+  }
+
 
   /**
    * Create.
@@ -32,34 +45,27 @@ public final class BigDecimalVariableValueProvider implements VariableValueProvi
    * @return new instance
    */
   public static BigDecimalVariableValueProvider createValueProvider() {
-    return new BigDecimalVariableValueProvider(emptyMap());
-  }
-
-  /**
-   * Adds a value for a variable.
-   *
-   * @param variable the variable
-   * @param value the value
-   * @return itself
-   */
-  public BigDecimalVariableValueProvider with(String variable, BigDecimal value) {
-    map.put(variable, value);
-    return this;
+    return new BigDecimalVariableValueProvider();
   }
 
   @Override
-  public BigDecimal getValue(String variable) {
-    return map.get(variable);
+  public BigDecimal convert(BigDecimal value) {
+    return value;
   }
 
   @Override
-  public Set<String> getVariables() {
-    return unmodifiableSet(map.keySet());
+  public BigDecimal convert(Double value) {
+    return new BigDecimal(value, conversionMathContext);
   }
 
   @Override
-  public String toString() {
-    return map.entrySet().stream().map((e) -> e.getKey() + "=" + e.getValue()).collect(Collectors.joining(";"));
+  public BigDecimal convert(Long value) {
+    return BigDecimal.valueOf(value);
+  }
+
+  @Override
+  public BigDecimal convert(Integer value) {
+    return BigDecimal.valueOf(value);
   }
 
 }

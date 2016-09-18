@@ -22,7 +22,7 @@ public class ConstantBigDecimalTerm implements Term<BigDecimal> {
   }
 
   @Override
-  public BigDecimal evaluate(VariableValueProvider input, FormulaEvaluatorConfiguration conf) {
+  public BigDecimal evaluate(VariableValueProvider<BigDecimal, ?> input, FormulaEvaluatorConfiguration conf) {
     return value;
   }
 
