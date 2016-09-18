@@ -172,7 +172,8 @@ public class FormulaEvaluator {
    */
   public FormulaEvaluator setConfiguration(FormulaEvaluatorConfiguration configuration) {
     checkNotNull(configuration, "Formula evaluator configuration should never be null");
-    if (!configuration.isModifiable()) {
+    // if the instance is modifiable, perhaps it will be changed by the caller => make a clone
+    if (configuration.isModifiable()) {
       this.configuration = new FormulaEvaluatorConfiguration(configuration);
     }
     this.configuration = configuration;
