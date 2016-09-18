@@ -1,5 +1,7 @@
 package com.github.dkellenb.formulaevaluator;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -9,6 +11,23 @@ import static org.junit.Assert.assertThat;
  * Tests formula evaluator
  */
 public class FormulaEvaluatorTest {
+
+  @Test
+  public void shouldCalcWithDoubleAndBigDecimalSameSimpleResult() {
+    // given
+    FormulaEvaluator bigDecimalFormulaEvaluator = new FormulaEvaluator("a + b");
+    bigDecimalFormulaEvaluator.with("a", BigDecimal.ONE).with("b", BigDecimal.valueOf(2));
+    FormulaEvaluator doubleFormulaEvaluator = new FormulaEvaluator("a + b");
+    doubleFormulaEvaluator.with("a", BigDecimal.ONE).with("b", BigDecimal.valueOf(2));
+    doubleFormulaEvaluator.setBaseCalculationType(Double.class);
+
+    // when
+    BigDecimal bigDecimalValue = bigDecimalFormulaEvaluator.evalPrecise();
+    BigDecimal doubleValue = doubleFormulaEvaluator.evalPrecise();
+
+    // then
+    assertThat(bigDecimalValue, equalTo(doubleValue));
+  }
 
   @Test
   public void shouldReturnModifiableConfiguration() {

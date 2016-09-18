@@ -68,7 +68,7 @@ public final class TermTester<T> {
    * @param expectedValue expected value
    */
   public void equalTo(T expectedValue) {
-    VariableValueProvider<T, ?> valueProvider = new GenericInitOnlyVariableValueProvider<>(values);
+    VariableValueProvider<T> valueProvider = new GenericInitOnlyVariableValueProvider<>(values);
     T value = term.evaluate(valueProvider, configuration);
     assertThat("For formula '" + term.printFormula() + "' with variables: " + valueProvider + " expected result of '"
       + expectedValue + "' does not match.", value, IsEqual.equalTo(expectedValue));
@@ -80,7 +80,7 @@ public final class TermTester<T> {
    * @param expectedException the expected exeption
    */
   public void isThrowing(Class<? extends Exception> expectedException) {
-    VariableValueProvider<T, ?> valueProvider = new GenericInitOnlyVariableValueProvider<>(values);
+    VariableValueProvider<T> valueProvider = new GenericInitOnlyVariableValueProvider<>(values);
     try {
       T value = term.evaluate(valueProvider, configuration);
       fail("For formula '" + term.printFormula() + "' with variables : " + valueProvider

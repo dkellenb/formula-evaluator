@@ -2,8 +2,8 @@ package com.github.dkellenb.formulaevaluator.term.operator;
 
 import java.math.BigDecimal;
 
-import com.github.dkellenb.formulaevaluator.term.value.ConstantBigDecimalTerm;
-import com.github.dkellenb.formulaevaluator.term.value.BigDecimalVariable;
+import com.github.dkellenb.formulaevaluator.term.value.ConstantTerm;
+import com.github.dkellenb.formulaevaluator.term.value.GenericVariable;
 
 /**
  * Generic test class for all operators
@@ -16,8 +16,8 @@ public class OperatorTest {
    * @param name variable name
    * @return new instance
    */
-  protected static BigDecimalVariable v(String name) {
-    return new BigDecimalVariable(name);
+  protected static GenericVariable<BigDecimal> v(String name) {
+    return new GenericVariable<>(name);
   }
 
   /**
@@ -26,8 +26,8 @@ public class OperatorTest {
    * @param value the value
    * @return constant term
    */
-  protected static ConstantBigDecimalTerm c(BigDecimal value) {
-    return new ConstantBigDecimalTerm(value);
+  protected static ConstantTerm<BigDecimal> c(BigDecimal value) {
+    return new ConstantTerm<>(value);
   }
 
   protected static final BigDecimal TWO = new BigDecimal(2);

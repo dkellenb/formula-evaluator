@@ -1,5 +1,6 @@
 package com.github.dkellenb.formulaevaluator;
 
+import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
@@ -21,6 +22,8 @@ public class FormulaEvaluatorConfiguration {
   private BasicOperationsNullHandling divisionNullHandling = BasicOperationsNullHandling.INHERIT;
 
   private DivisionByZeroHandling divisionByZeroHandling = DivisionByZeroHandling.INHERIT;
+
+  private Class<? extends Number> baseType = BigDecimal.class;
 
   private boolean modifiable = true;
 
@@ -53,6 +56,7 @@ public class FormulaEvaluatorConfiguration {
     this.multiplicationNullHandling = configuration.multiplicationNullHandling;
     this.divisionNullHandling = configuration.divisionNullHandling;
     this.divisionByZeroHandling = configuration.divisionByZeroHandling;
+    this.baseType = configuration.baseType;
   }
 
   /**
@@ -173,6 +177,22 @@ public class FormulaEvaluatorConfiguration {
   }
 
   /**
+   * Sets based on which type the calculations shall be performed. At the moment only BigDecimal and Double are
+   * supported.
+   *
+   * @param clazz base type
+   * @return self
+   */
+  public FormulaEvaluatorConfiguration setBaseCalculationType(Class<? extends Number> clazz) {
+    checkModifiable();
+    if (!BigDecimal.class.equals(clazz) && !Double.class.equals(clazz)) {
+      throw new IllegalArgumentException("Only BigDecimal or Double as base calculation types are supported");
+    }
+    this.baseType = clazz;
+    return this;
+  }
+
+  /**
    * Gets the MathContext used for calculations.
    * @return not null
    */
@@ -226,6 +246,15 @@ public class FormulaEvaluatorConfiguration {
    */
   public DivisionByZeroHandling getDivisionByZeroHandling() {
     return divisionByZeroHandling;
+  }
+
+  /**
+   * Base type to be used for calculations.
+   *
+   * @return the base type
+   */
+  public Class<? extends Number> getBaseType() {
+    return this.baseType;
   }
 
   private void checkModifiable() {

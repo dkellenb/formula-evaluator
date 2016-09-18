@@ -8,7 +8,7 @@ import java.util.Map;
  * HashMap based value provider.
  */
 public final class BigDecimalVariableValueProvider
-    extends GenericVariableValueProvider<BigDecimal, BigDecimalVariableValueProvider> {
+    extends GenericVariableValueProvider<BigDecimal, BigDecimal, BigDecimalVariableValueProvider> {
 
   private final MathContext conversionMathContext;
 
@@ -68,4 +68,8 @@ public final class BigDecimalVariableValueProvider
     return BigDecimal.valueOf(value);
   }
 
+  @Override
+  public BigDecimal getValue(String variable) {
+    return super.getStoredValue(variable);
+  }
 }

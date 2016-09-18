@@ -1,28 +1,28 @@
 package com.github.dkellenb.formulaevaluator.term.value;
 
-import java.math.BigDecimal;
-
 import com.github.dkellenb.formulaevaluator.FormulaEvaluatorConfiguration;
-import com.github.dkellenb.formulaevaluator.term.Term;
 import com.github.dkellenb.formulaevaluator.VariableValueProvider;
+import com.github.dkellenb.formulaevaluator.term.Term;
 
 /**
  * BigDecimal Term.
+ *
+ * @param <T> calculation base type
  */
-public class ConstantBigDecimalTerm implements Term<BigDecimal> {
+public class ConstantTerm<T> implements Term<T> {
 
-  private final BigDecimal value;
+  private final T value;
 
   /**
    * Creates a BigDecimal Term.
    * @param value the value
    */
-  public ConstantBigDecimalTerm(BigDecimal value) {
+  public ConstantTerm(T value) {
     this.value = value;
   }
 
   @Override
-  public BigDecimal evaluate(VariableValueProvider<BigDecimal, ?> input, FormulaEvaluatorConfiguration conf) {
+  public T evaluate(VariableValueProvider<T> input, FormulaEvaluatorConfiguration conf) {
     return value;
   }
 

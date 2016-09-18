@@ -14,7 +14,7 @@ public final class BigDecimalCachedFormulaCompiler extends CachedFormulaCompiler
 
   private BigDecimalCachedFormulaCompiler() {
     // hidden c'tor.
-    super(FormulaCompiler::compile);
+    super((formula, variables) -> FormulaCompiler.compile(BigDecimal.class, formula, variables));
   }
 
   /**

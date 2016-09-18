@@ -1,5 +1,7 @@
 package com.github.dkellenb.formulaevaluator;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;

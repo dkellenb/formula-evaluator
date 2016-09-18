@@ -13,6 +13,7 @@ import com.github.dkellenb.formulaevaluator.definition.Function;
 import com.github.dkellenb.formulaevaluator.definition.Operator;
 import com.github.dkellenb.formulaevaluator.exceptions.FormulaEvaluatorException;
 import com.github.dkellenb.formulaevaluator.mapping.BigDecimalTermFactory;
+import com.github.dkellenb.formulaevaluator.mapping.DoubleTermFactory;
 import com.github.dkellenb.formulaevaluator.mapping.TermFactory;
 import com.github.dkellenb.formulaevaluator.term.Term;
 
@@ -53,16 +54,6 @@ final class FormulaCompiler<T> {
   /** What character to use for minus sign (negative values). */
   private static final char MINUS_SIGN = '-';
 
-  /**
-   * Compiles a formula and returns the Calculation Tree.
-   *
-   * @param formula the formula
-   * @param variables all variables in the formula
-   * @return the tree
-   */
-  public static Term<BigDecimal> compile(String formula, String... variables) {
-    return create(formula, variables).build();
-  }
 
   /**
    * Compiles a formula and returns the Calculation Tree.
@@ -71,8 +62,34 @@ final class FormulaCompiler<T> {
    * @param variables all variables in the formula
    * @return the tree
    */
-  public static Term<BigDecimal> compile(String formula, Set<String> variables) {
-    return create(formula, variables).build();
+  public static Term<BigDecimal> compile(String formula, String... variables) {
+    return create(BigDecimal.class, formula, variables).build();
+  }
+
+  /**
+   * Compiles a formula and returns the Calculation Tree.
+   *
+   * @param <T> which base type
+   * @param clazz for which base type
+   * @param formula the formula
+   * @param variables all variables in the formula
+   * @return the tree
+   */
+  public static <T> Term<T> compile(Class<T> clazz, String formula, String... variables) {
+    return create(clazz, formula, variables).build();
+  }
+
+  /**
+   * Compiles a formula and returns the Calculation Tree.
+   *
+   * @param <T> which base type
+   * @param clazz for which base type
+   * @param formula the formula
+   * @param variables all variables in the formula
+   * @return the tree
+   */
+  public static <T> Term<T> compile(Class<T> clazz, String formula, Set<String> variables) {
+    return create(clazz, formula, variables).build();
   }
 
   /**
@@ -85,20 +102,48 @@ final class FormulaCompiler<T> {
   public static FormulaCompiler<BigDecimal> create(String formula, String... variables) {
     return new FormulaCompiler<>(formula,
       variables.length == 0 ? emptySet() : new HashSet<>(asList(variables)),
-      BigDecimalTermFactory.getInstance());
+      getTermFactory(BigDecimal.class));
   }
 
   /**
-   * Creates a BigDecimal based formula compiler. Default visibility for testing purpose.
+   * Creates a T based formula compiler. Default visibility for testing purpose.
    *
+   * @param <T> which base type
+   * @param clazz for which base type
    * @param formula the formula
    * @param variables known variables
    * @return the compiler
    */
-  public static FormulaCompiler<BigDecimal> create(String formula, Set<String> variables) {
+  public static <T> FormulaCompiler<T> create(Class<T> clazz, String formula, String... variables) {
+    return new FormulaCompiler<>(formula,
+      variables.length == 0 ? emptySet() : new HashSet<>(asList(variables)),
+      getTermFactory(clazz));
+  }
+
+  /**
+   * Creates a T based formula compiler. Default visibility for testing purpose.
+   *
+   * @param <T> which base type
+   * @param clazz for which base type
+   * @param formula the formula
+   * @param variables known variables
+   * @return the compiler
+   */
+  public static <T> FormulaCompiler<T> create(Class<T> clazz, String formula, Set<String> variables) {
     return new FormulaCompiler<>(formula,
       new HashSet<>(variables),
-      BigDecimalTermFactory.getInstance());
+      getTermFactory(clazz));
+  }
+
+  @SuppressWarnings("unchecked")
+  private static <T> TermFactory<T> getTermFactory(Class<T> clazz) {
+    if (BigDecimal.class.equals(clazz)) {
+      return (TermFactory<T>) BigDecimalTermFactory.getInstance();
+    } else if (Double.class.equals(clazz)) {
+      return (TermFactory<T>) DoubleTermFactory.getInstance();
+    } else {
+      throw new IllegalArgumentException("Class " + clazz + " not supported");
+    }
   }
 
   private FormulaCompiler(String formula, Set<String> variables, TermFactory<T> termFactory) {

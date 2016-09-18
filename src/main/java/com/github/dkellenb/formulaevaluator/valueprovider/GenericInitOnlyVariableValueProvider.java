@@ -9,7 +9,7 @@ import java.util.Map;
  * @param <T> type of the values.
  */
 public class GenericInitOnlyVariableValueProvider<T>
-    extends GenericVariableValueProvider<T, GenericInitOnlyVariableValueProvider<T>> {
+    extends GenericVariableValueProvider<T, T, GenericInitOnlyVariableValueProvider<T>> {
 
   /**
    * C'tor.
@@ -38,6 +38,11 @@ public class GenericInitOnlyVariableValueProvider<T>
   @Override
   public T convert(Long value) {
     throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public T getValue(String variable) {
+    return super.getStoredValue(variable);
   }
 
 }

@@ -1,14 +1,14 @@
 package com.github.dkellenb.formulaevaluator.term.value;
 
-import java.math.BigDecimal;
-
 import com.github.dkellenb.formulaevaluator.FormulaEvaluatorConfiguration;
 import com.github.dkellenb.formulaevaluator.VariableValueProvider;
 
 /**
- * BigDecimal variable.
+ * Generic variable.
+ *
+ * @param <T> data type
  */
-public class BigDecimalVariable implements Variable<BigDecimal> {
+public class GenericVariable<T> implements Variable<T> {
 
   private final String variableName;
 
@@ -17,12 +17,12 @@ public class BigDecimalVariable implements Variable<BigDecimal> {
    *
    * @param variableName name of the variable
    */
-  public BigDecimalVariable(String variableName) {
+  public GenericVariable(String variableName) {
     this.variableName = variableName;
   }
 
   @Override
-  public BigDecimal evaluate(VariableValueProvider<BigDecimal, ?> input, FormulaEvaluatorConfiguration configuration) {
+  public T evaluate(VariableValueProvider<T> input, FormulaEvaluatorConfiguration configuration) {
     return input.getValue(variableName);
   }
 

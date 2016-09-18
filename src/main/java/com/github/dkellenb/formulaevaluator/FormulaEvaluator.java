@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.github.dkellenb.formulaevaluator.term.Term;
 import com.github.dkellenb.formulaevaluator.valueprovider.BigDecimalVariableValueProvider;
+import com.github.dkellenb.formulaevaluator.valueprovider.DoubleVariableValueProvider;
 
 /**
  * Formula Evaluator is a handy expression evaluator for Java, that allows to evaluate simple mathematical and boolean
@@ -62,9 +63,18 @@ public class FormulaEvaluator {
    * @return the result of the expression.
    */
   public BigDecimal evalPrecise() {
-    Set<String> variables = valueProvider.getVariables();
-    Term<BigDecimal> term = BigDecimalCachedFormulaCompiler.getTerm(formula, variables);
-    BigDecimal result = term.evaluate(valueProvider, this.configuration);
+    final Set<String> variables = valueProvider.getVariables();
+    final BigDecimal result;
+    if (BigDecimal.class.equals(getConfiguration().getBaseType())) {
+      Term<BigDecimal> term = BigDecimalCachedFormulaCompiler.getTerm(formula, variables);
+      result = term.evaluate(valueProvider, this.configuration);
+    } else {
+      Term<Double> term = DoubleCachedFormulaCompiler.getTerm(formula, variables);
+      Double doubleResult = term.evaluate(new DoubleVariableValueProvider(valueProvider), this.configuration);
+      result = doubleResult == null
+        ? null
+        : new BigDecimal(doubleResult, this.configuration.getCalculationMathContext());
+    }
     return result == null
       ? null
       : result.stripTrailingZeros();
@@ -299,10 +309,20 @@ public class FormulaEvaluator {
     return this;
   }
 
+  /**
+   * Sets the type which shall be used for calculations.
+   *
+   * @param calculationBaseType BigDecimal or Double (BigDecimal is default).
+   * @return self
+   */
+  public FormulaEvaluator setBaseCalculationType(Class<? extends Number> calculationBaseType) {
+    getConfiguration().setBaseCalculationType(calculationBaseType);
+    return this;
+  }
+
   private static void checkNotNull(Object value, String message) {
     if (value == null) {
       throw new IllegalArgumentException(message);
     }
   }
-
 }

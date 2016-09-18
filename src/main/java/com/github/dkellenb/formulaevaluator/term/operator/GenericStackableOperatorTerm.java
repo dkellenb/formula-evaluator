@@ -29,7 +29,7 @@ public abstract class GenericStackableOperatorTerm<T> extends GenericOperatorTer
   }
 
   @Override
-  public T evaluate(VariableValueProvider<T, ?> input, FormulaEvaluatorConfiguration conf) {
+  public T evaluate(VariableValueProvider<T> input, FormulaEvaluatorConfiguration conf) {
     // Simple case: Only one element
     if (applicants.length == 0) {
       return base.evaluate(input, conf);

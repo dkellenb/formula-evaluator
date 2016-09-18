@@ -18,7 +18,7 @@ public interface Term<T> {
    *
    * @return the evaluated output
    */
-  T evaluate(VariableValueProvider<T, ?> input, FormulaEvaluatorConfiguration configuration);
+  T evaluate(VariableValueProvider<T> input, FormulaEvaluatorConfiguration configuration);
 
   /**
    * Prints the calculation formula.

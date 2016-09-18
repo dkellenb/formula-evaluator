@@ -47,7 +47,7 @@ public abstract class GenericFunctionTerm<T> implements FunctionTerm<T> {
   }
 
   @Override
-  public T evaluate(VariableValueProvider<T, ?> input, FormulaEvaluatorConfiguration conf) {
+  public T evaluate(VariableValueProvider<T> input, FormulaEvaluatorConfiguration conf) {
     // Simple case: No element
     if (parameters.size() == 0) {
       return calculate(conf, emptyList());

@@ -12,7 +12,7 @@ import com.github.dkellenb.formulaevaluator.FormulaEvaluatorConfiguration;
 import com.github.dkellenb.formulaevaluator.definition.Function;
 import com.github.dkellenb.formulaevaluator.definition.Operator;
 import com.github.dkellenb.formulaevaluator.term.Term;
-import com.github.dkellenb.formulaevaluator.term.value.ConstantBigDecimalTerm;
+import com.github.dkellenb.formulaevaluator.term.value.ConstantTerm;
 import com.github.dkellenb.formulaevaluator.valueprovider.BigDecimalVariableValueProvider;
 import com.github.dkellenb.formulaevaluator.VariableValueProvider;
 import com.github.dkellenb.formulaevaluator.definition.Constant;
@@ -83,7 +83,7 @@ public class BigDecimalTermFactoryTest {
     List<Operator> unsupportedOperators = new LinkedList<>();
     for (Operator operator : Operator.ALL_OPERATORS) {
       try {
-        factory.getOperatorTerm(operator, new ConstantBigDecimalTerm(ONE), new ConstantBigDecimalTerm(ONE));
+        factory.getOperatorTerm(operator, new ConstantTerm<>(ONE), new ConstantTerm<>(ONE));
       } catch (UnsupportedOperationException e) {
         unsupportedOperators.add(operator);
       }
@@ -117,7 +117,7 @@ public class BigDecimalTermFactoryTest {
   }
 
   private List<Term<BigDecimal>> createConstArgs(Function function) {
-    Stream<ConstantBigDecimalTerm> argStream = IntStream.range(0, function.getNumParams()).mapToObj(v -> new ConstantBigDecimalTerm(ONE));
+    Stream<ConstantTerm<BigDecimal>> argStream = IntStream.range(0, function.getNumParams()).mapToObj(v -> new ConstantTerm<>(ONE));
     return argStream.collect(toList());
   }
 
@@ -131,7 +131,7 @@ public class BigDecimalTermFactoryTest {
     Term<BigDecimal> nullTerm = new Term<BigDecimal>() {
 
       @Override
-      public BigDecimal evaluate(VariableValueProvider<BigDecimal, ?> input, FormulaEvaluatorConfiguration configuration) {
+      public BigDecimal evaluate(VariableValueProvider<BigDecimal> input, FormulaEvaluatorConfiguration configuration) {
         return null;
       }
 

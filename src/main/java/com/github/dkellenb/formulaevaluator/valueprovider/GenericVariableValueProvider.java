@@ -6,27 +6,26 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.github.dkellenb.formulaevaluator.VariableValueProvider;
-
 import static java.util.Collections.unmodifiableSet;
 
 /**
  * Generic variable value provider.
  *
- * @param <T> type of the values.
+ * @param <T> type of the values returned
+ * @param <V> type of the values stored
  * @param <I> self instance type
  */
-public abstract class GenericVariableValueProvider<T, I extends VariableValueProvider<T, I>>
-    implements VariableValueProvider<T, I> {
+public abstract class GenericVariableValueProvider<T, V, I extends ModifiableVariableValueProvider<T, I>>
+    implements ModifiableVariableValueProvider<T, I> {
 
-  private final Map<String, T> map;
+  private final Map<String, V> map;
 
   /**
    * C'tor with initial map.
    *
    * @param initialMap initial map
    */
-  public GenericVariableValueProvider(Map<String, T> initialMap) {
+  public GenericVariableValueProvider(Map<String, V> initialMap) {
     this.map = initialMap;
   }
 
@@ -51,38 +50,6 @@ public abstract class GenericVariableValueProvider<T, I extends VariableValuePro
     return (I) this;
   }
 
-  /**
-   * Converts the value.
-   *
-   * @param value value
-   * @return desired output
-   */
-  protected abstract T convert(BigDecimal value);
-
-  /**
-   * Converts the value.
-   *
-   * @param value value
-   * @return desired output
-   */
-  protected abstract T convert(Double value);
-
-  /**
-   * Converts the value.
-   *
-   * @param value value
-   * @return desired output
-   */
-  protected abstract T convert(Long value);
-
-  /**
-   * Converts the value.
-   *
-   * @param value value
-   * @return desired output
-   */
-  protected abstract T convert(Integer value);
-
   @Override
   @SuppressWarnings("unchecked")
   public I with(String variable, Double value) {
@@ -104,8 +71,45 @@ public abstract class GenericVariableValueProvider<T, I extends VariableValuePro
     return (I) this;
   }
 
-  @Override
-  public T getValue(String variable) {
+  /**
+   * Converts the value.
+   *
+   * @param value value
+   * @return desired output
+   */
+  protected abstract V convert(BigDecimal value);
+
+  /**
+   * Converts the value.
+   *
+   * @param value value
+   * @return desired output
+   */
+  protected abstract V convert(Double value);
+
+  /**
+   * Converts the value.
+   *
+   * @param value value
+   * @return desired output
+   */
+  protected abstract V convert(Long value);
+
+  /**
+   * Converts the value.
+   *
+   * @param value value
+   * @return desired output
+   */
+  protected abstract V convert(Integer value);
+
+  /**
+   * Get stored value.
+   *
+   * @param variable variable
+   * @return the stored value
+   */
+  protected V getStoredValue(String variable) {
     return map.get(variable);
   }
 
