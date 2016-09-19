@@ -13,7 +13,7 @@ import com.github.dkellenb.formulaevaluator.exceptions.FormulaEvaluatorNullArgum
 import static java.math.BigDecimal.ONE;
 import static com.github.dkellenb.formulaevaluator.FormulaEvaluatorConfiguration.BasicOperationsNullHandling.IDENTITY;
 import static com.github.dkellenb.formulaevaluator.FormulaEvaluatorConfiguration.DefaultNullHandling.NULL;
-import static com.github.dkellenb.formulaevaluator.FormulaEvaluatorConfiguration.DefaultNullHandling.ZERO;
+import static java.math.BigDecimal.ZERO;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -64,7 +64,7 @@ public class BigDecimalDivisionOperatorTest extends OperatorTest {
   @Test
   public void shouldCalculateWithZeroFocused() {
     FormulaEvaluatorConfiguration conf = new FormulaEvaluatorConfiguration();
-    conf.setDefaultNullHandling(ZERO);
+    conf.setDefaultNullHandling(FormulaEvaluatorConfiguration.DefaultNullHandling.ZERO);
 
     // positive test cases
     TermTester.testThat(createOp(v("a"))).with("a", ONE).with(conf).equalTo(ONE);
@@ -89,6 +89,16 @@ public class BigDecimalDivisionOperatorTest extends OperatorTest {
     TermTester.testThat(createOp(v("a"))).with(conf).equalTo(null);
     TermTester.testThat(createOp(v("a"), v("b"))).with(conf).equalTo(null);
     TermTester.testThat(createOp(v("a"), v("b"))).with("a", FOUR).with(conf).equalTo(FOUR);
+  }
+
+  @Test
+  public void divideZeroByZeroShouldBeNullForNullFocused() {
+    // given
+    FormulaEvaluatorConfiguration conf = new FormulaEvaluatorConfiguration();
+    conf.setDivisionByZeroHandling(FormulaEvaluatorConfiguration.DivisionByZeroHandling.NULL);
+
+    // test
+    TermTester.testThat(createOp(v("a"), v("b"))).with("a", ZERO).with("b", ZERO).with(conf).equalTo(null);
   }
 
   private static Term<BigDecimal> createOp(Term<BigDecimal> base) {
