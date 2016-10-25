@@ -54,7 +54,9 @@ public class FormulaEvaluator {
     BigDecimal preciseValue = evalPrecise();
     return preciseValue == null
       ? null
-      : preciseValue.round(this.configuration.getResultMathContext()).stripTrailingZeros();
+      : preciseValue.round(this.configuration.getResultMathContext())
+          .setScale(this.configuration.getResultScale(), this.configuration.getResultMathContext().getRoundingMode())
+          .stripTrailingZeros();
   }
 
   /**
@@ -224,6 +226,18 @@ public class FormulaEvaluator {
   public FormulaEvaluator setResultPrecision(int precision) {
     modifiableConfiguration();
     this.configuration.setResultPrecision(precision);
+    return this;
+  }
+
+  /**
+   * Sets the result scale for the result of the formula evaluation.
+   *
+   * @param scale the rounding scale
+   * @return this formula evaluator instance in order to allow to chaining methods
+   */
+  public FormulaEvaluator setResultScale(int scale) {
+    modifiableConfiguration();
+    this.configuration.setResultScale(scale);
     return this;
   }
 

@@ -87,4 +87,17 @@ public class FormulaEvaluatorTest {
     assertThat(formulaEvaluator.getFormula(), equalTo(formula));
   }
 
+  @Test
+  public void shouldScale() {
+    // given
+    String formula = "1 / 3";
+
+    // when
+    FormulaEvaluator formulaEvaluator = new FormulaEvaluator(formula);
+    formulaEvaluator.setResultScale(2);
+
+    // then
+    assertThat(formulaEvaluator.evalRounded(), equalTo(new BigDecimal("0.33")));
+  }
+
 }

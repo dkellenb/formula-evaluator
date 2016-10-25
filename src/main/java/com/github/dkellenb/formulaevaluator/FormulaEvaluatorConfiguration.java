@@ -13,6 +13,8 @@ public class FormulaEvaluatorConfiguration {
 
   private MathContext resultMathContext = MathContext.DECIMAL32;
 
+  private int resultScale = 7;
+
   private DefaultNullHandling defaultNullHandling = DefaultNullHandling.EXCEPTION;
 
   private BasicOperationsNullHandling plusMinusNullHandling = BasicOperationsNullHandling.INHERIT;
@@ -51,6 +53,7 @@ public class FormulaEvaluatorConfiguration {
   public FormulaEvaluatorConfiguration(FormulaEvaluatorConfiguration configuration) {
     this.calculationMathContext = configuration.calculationMathContext;
     this.resultMathContext = configuration.resultMathContext;
+    this.resultScale = configuration.resultScale;
     this.defaultNullHandling = configuration.defaultNullHandling;
     this.plusMinusNullHandling = configuration.plusMinusNullHandling;
     this.multiplicationNullHandling = configuration.multiplicationNullHandling;
@@ -126,6 +129,15 @@ public class FormulaEvaluatorConfiguration {
     checkModifiable();
     calculationMathContext = new MathContext(calculationMathContext.getPrecision(), roundingMode);
     resultMathContext = new MathContext(resultMathContext.getPrecision(), roundingMode);
+  }
+
+  /**
+   * Sets the scale for the rounding.
+   *
+   * @param scale scale for the rounding
+   */
+  public void setResultScale(int scale) {
+    resultScale = scale;
   }
 
   /**
@@ -206,6 +218,14 @@ public class FormulaEvaluatorConfiguration {
    */
   public MathContext getResultMathContext() {
     return resultMathContext;
+  }
+
+  /**
+   * Gets the result scale used for rounding at the end.
+   * @return result scale
+   */
+  public int getResultScale() {
+    return resultScale;
   }
 
   /**
