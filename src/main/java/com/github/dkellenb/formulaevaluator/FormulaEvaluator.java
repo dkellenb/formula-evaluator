@@ -54,9 +54,21 @@ public class FormulaEvaluator {
     BigDecimal preciseValue = evalPrecise();
     return preciseValue == null
       ? null
+      : preciseValue.round(this.configuration.getResultMathContext());
+  }
+
+  /**
+   * Evaluates the expression.
+   *
+   * @return The result of the expression.
+   */
+  public BigDecimal evalRoundedAndScaled() {
+    BigDecimal preciseValue = evalPrecise();
+    return preciseValue == null
+      ? null
       : preciseValue.round(this.configuration.getResultMathContext())
-          .setScale(this.configuration.getResultScale(), this.configuration.getResultMathContext().getRoundingMode())
-          .stripTrailingZeros();
+                    .setScale(this.configuration.getResultScale(),
+                              this.configuration.getResultMathContext().getRoundingMode());
   }
 
   /**

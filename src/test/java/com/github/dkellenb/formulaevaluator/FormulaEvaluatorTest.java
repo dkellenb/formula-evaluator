@@ -97,7 +97,7 @@ public class FormulaEvaluatorTest {
     formulaEvaluator.setResultScale(2);
 
     // then
-    assertThat(formulaEvaluator.evalRounded(), equalTo(new BigDecimal("0.33")));
+    assertThat(formulaEvaluator.evalRoundedAndScaled(), equalTo(new BigDecimal("0.33")));
   }
 
 }
