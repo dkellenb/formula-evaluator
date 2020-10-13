@@ -10,7 +10,7 @@ Simple usage:
 
 ```java
 BigDecimal result = FormulaEvaluator.create("IF(a >= 8, a * betta ^ 3, a / gamma)")
-                                    .with("a", a).and("betta", betta).and("gamma", gamma)
+                                    .with("a", a).and("beta", beta).and("gamma", gamma)
                                     .eval();
 ```
 
